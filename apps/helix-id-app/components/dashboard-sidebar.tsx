@@ -10,7 +10,6 @@ import {
   LayoutDashboard,
   ChevronLeft,
   ChevronRight,
-  Fingerprint,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
@@ -60,14 +59,18 @@ export function DashboardSidebar() {
       )}
       style={{ transition: "width 200ms ease" }}
     >
-      <div className="flex items-center gap-3 border-b border-border px-4 py-5">
-        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary">
-          <Fingerprint className="h-4 w-4 text-primary-foreground" />
-        </div>
+      <div className="flex items-center gap-0 border-b border-border px-4 py-5">
+        <img
+          src="/didlogonew.png"
+          alt="HelixID Logo"
+          style={{ height: "48px", objectFit: "contain" }}
+        />
         {!collapsed && (
-          <span className="text-lg font-semibold tracking-tight text-foreground">
-            HelixID
-          </span>
+          <img
+            src="/Helix-ID.png"
+            alt="HelixID Letter"
+            style={{ height: "110px", marginLeft: "-68px", objectFit: "contain" }}
+          />
         )}
       </div>
 

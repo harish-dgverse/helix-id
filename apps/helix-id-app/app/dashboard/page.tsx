@@ -177,7 +177,7 @@ export default async function DashboardPage() {
       </div>
 
       {/* Trust Architecture Banner */}
-      <Card className="border-border bg-card">
+      {/* <Card className="border-border bg-card">
         <CardContent className="p-5">
           <p className="mb-4 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             Trust Architecture
@@ -204,7 +204,7 @@ export default async function DashboardPage() {
             ))}
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
 
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
@@ -285,44 +285,45 @@ export default async function DashboardPage() {
                   .includes("VIOLATION")
                 const iconApproved = !isViolation
                 return (
-                <div
-                  key={item.id}
-                  className="flex items-center justify-between rounded-md border border-border bg-secondary/50 px-4 py-3"
-                >
-                  <div className="flex items-center gap-3">
-                    {iconApproved ? (
-                      <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
-                    ) : (
-                      <XCircle className="h-4 w-4 shrink-0 text-destructive" />
-                    )}
-                    <div>
-                      <p className="text-sm font-medium text-foreground">
-                        {formatActivityType(item.type || "")}
-                      </p>
-                      <p className="text-xs text-muted-foreground">
-                        {item.agentName || "Unknown agent"}
-                      </p>
+                  <div
+                    key={item.id}
+                    className="flex items-center justify-between rounded-md border border-border bg-secondary/50 px-4 py-3"
+                  >
+                    <div className="flex items-center gap-3">
+                      {iconApproved ? (
+                        <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
+                      ) : (
+                        <XCircle className="h-4 w-4 shrink-0 text-destructive" />
+                      )}
+                      <div>
+                        <p className="text-sm font-medium text-foreground">
+                          {formatActivityType(item.type || "")}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {item.agentName || "Unknown agent"}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <Badge
+                        variant={
+                          iconApproved ? "default" : "destructive"
+                        }
+                        className={
+                          iconApproved
+                            ? "bg-success/10 text-success hover:bg-success/10"
+                            : ""
+                        }
+                      >
+                        {iconApproved ? "Approved" : "Violation"}
+                      </Badge>
+                      <span className="text-xs text-muted-foreground">
+                        {formatRelative(item.timestamp)}
+                      </span>
                     </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Badge
-                      variant={
-                        iconApproved ? "default" : "destructive"
-                      }
-                      className={
-                        iconApproved
-                          ? "bg-success/10 text-success hover:bg-success/10"
-                          : ""
-                      }
-                    >
-                      {iconApproved ? "Approved" : "Violation"}
-                    </Badge>
-                    <span className="text-xs text-muted-foreground">
-                      {formatRelative(item.timestamp)}
-                    </span>
-                  </div>
-                </div>
-              )})}
+                )
+              })}
             </div>
           </CardContent>
         </Card>
