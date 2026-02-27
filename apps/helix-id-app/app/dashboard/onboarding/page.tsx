@@ -16,20 +16,21 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 
 type OnboardingResult = {
   did: string
   walletStatus: string
-  publicKey: string
+  walletId: string
   timestamp: string
+  name: string
+  organization: string
 }
 
 const pipelineSteps = [
@@ -46,24 +47,70 @@ export default function OnboardingPage() {
   const [result, setResult] = useState<OnboardingResult | null>(null)
   const [copiedField, setCopiedField] = useState<string | null>(null)
 
+  const [agentName, setAgentName] = useState("")
+  const [organization, setOrganization] = useState("")
+
+  const [showResultDialog, setShowResultDialog] = useState(false)
+  const [hasClickedOnboard, setHasClickedOnboard] = useState(false)
+
   const handleOnboard = async () => {
+    if (!agentName.trim()) return
+    setHasClickedOnboard(true)
     setIsOnboarding(true)
     setResult(null)
 
-    for (let i = 0; i < pipelineSteps.length; i++) {
-      setCurrentStep(i)
-      await new Promise((resolve) => setTimeout(resolve, 800))
+    try {
+      const payload = {
+        name: agentName || "New Agent",
+        organization: organization || "Unassigned",
+      }
+
+      const onboardingPromise = fetch("/api/onboarding", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }).then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to onboard agent")
+        }
+        return res.json() as Promise<{
+          agent: {
+            id: string
+            did: string
+            walletId: string
+            createdAt: string
+          }
+        }>
+      })
+
+      for (let i = 0; i < pipelineSteps.length; i++) {
+        setCurrentStep(i)
+        await new Promise((resolve) => setTimeout(resolve, 800))
+      }
+
+      const data = await onboardingPromise
+      const { agent } = data
+      const safeName = agentName.trim() || "New Agent"
+      const safeOrg = organization.trim() || "Unassigned"
+
+      const newResult: OnboardingResult = {
+        did: agent.did,
+        walletStatus: "Active",
+        walletId: agent.walletId,
+        timestamp: agent.createdAt,
+        name: safeName,
+        organization: safeOrg,
+      }
+
+      setResult(newResult)
+      setShowResultDialog(true)
+    } catch (error) {
+      console.error("Onboarding failed", error)
+    } finally {
+      setIsOnboarding(false)
     }
-
-    setResult({
-      did: "did:hedera:mainnet:z6MkpTHR8VNs5zPBIZFgX3T1GERZR4BNnYBxkGwJEtM37UL8",
-      walletStatus: "Active",
-      publicKey:
-        "z6MkpTHR8VNs5zPBIZFgX3T1GERZR4BNnYBxkGwJEtM37UL8",
-      timestamp: new Date().toISOString(),
-    })
-
-    setIsOnboarding(false)
   }
 
   const copyToClipboard = (text: string, field: string) => {
@@ -84,7 +131,7 @@ export default function OnboardingPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Onboarding Form */}
         <Card className="border-border bg-card">
           <CardHeader>
@@ -99,6 +146,8 @@ export default function OnboardingPage() {
               </Label>
               <Input
                 id="agent-name"
+                value={agentName}
+                onChange={(e) => setAgentName(e.target.value)}
                 placeholder="e.g. OrderBot-v3"
                 className="bg-secondary"
               />
@@ -143,21 +192,18 @@ export default function OnboardingPage() {
 
             <div className="flex flex-col gap-2">
               <Label className="text-sm text-foreground">Organization</Label>
-              <Select defaultValue="acme">
-                <SelectTrigger className="bg-secondary">
-                  <SelectValue placeholder="Select organization" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="acme">Acme Corp</SelectItem>
-                  <SelectItem value="globex">Globex Inc</SelectItem>
-                  <SelectItem value="initech">Initech Systems</SelectItem>
-                </SelectContent>
-              </Select>
+              <Input
+                id="organization"
+                value={organization}
+                onChange={(e) => setOrganization(e.target.value)}
+                placeholder="e.g. Acme Corp"
+                className="bg-secondary"
+              />
             </div>
 
             <Button
               onClick={handleOnboard}
-              disabled={isOnboarding}
+              disabled={!agentName.trim() || isOnboarding}
               className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90"
             >
               {isOnboarding ? (
@@ -172,9 +218,9 @@ export default function OnboardingPage() {
           </CardContent>
         </Card>
 
-        {/* Right Column: Pipeline + Results */}
+        {/* Middle Column: Pipeline (visible only after Onboard Agent clicked) */}
         <div className="flex flex-col gap-6">
-          {/* Pipeline Visualization */}
+          {(hasClickedOnboard || isOnboarding || result !== null) && (
           <Card className="border-border bg-card">
             <CardHeader>
               <CardTitle className="text-sm font-medium text-foreground">
@@ -227,56 +273,116 @@ export default function OnboardingPage() {
               </div>
             </CardContent>
           </Card>
+          )}
 
-          {/* Result Card */}
-          {result && (
-            <Card className="border-primary/20 bg-card">
+        </div>
+        {/* Right Column: Wallet details for the newly created agent */}
+        {result && (
+          <div className="flex flex-col gap-6">
+            <Card className="border-border bg-card">
               <CardHeader>
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-sm font-medium text-foreground">
-                    Agent Identity Created
-                  </CardTitle>
-                  <Badge className="bg-success/10 text-success hover:bg-success/10">
-                    Active
-                  </Badge>
-                </div>
+                <CardTitle className="text-sm font-medium text-foreground">
+                  Wallet Details
+                </CardTitle>
               </CardHeader>
               <CardContent className="flex flex-col gap-4">
-                <ResultField
-                  label="Decentralized Identifier (DID)"
-                  value={result.did}
-                  fieldKey="did"
-                  copiedField={copiedField}
-                  onCopy={copyToClipboard}
-                  mono
-                />
-                <ResultField
-                  label="Wallet Status"
-                  value={result.walletStatus}
-                  fieldKey="wallet"
-                  copiedField={copiedField}
-                  onCopy={copyToClipboard}
-                />
-                <ResultField
-                  label="Public Key"
-                  value={result.publicKey}
-                  fieldKey="publicKey"
-                  copiedField={copiedField}
-                  onCopy={copyToClipboard}
-                  mono
-                />
-                <ResultField
-                  label="Created At"
-                  value={new Date(result.timestamp).toLocaleString()}
-                  fieldKey="timestamp"
-                  copiedField={copiedField}
-                  onCopy={copyToClipboard}
-                />
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Attached Agent
+                  </span>
+                  <span className="text-sm text-foreground">
+                    {result.name}{" "}
+                    <span className="text-xs text-muted-foreground">
+                      ({result.organization})
+                    </span>
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Wallet ID
+                  </span>
+                  <span className="font-mono text-sm text-foreground">
+                    {result.walletId}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Agent DID
+                  </span>
+                  <span className="font-mono text-sm text-foreground">
+                    {result.did}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Wallet Status
+                  </span>
+                  <span className="text-sm text-foreground">
+                    {result.walletStatus}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Created At
+                  </span>
+                  <span className="text-sm text-foreground">
+                    {new Date(result.timestamp).toLocaleString()}
+                  </span>
+                </div>
               </CardContent>
             </Card>
-          )}
-        </div>
+          </div>
+        )}
       </div>
+
+      <Dialog
+        open={!!result && showResultDialog}
+        onOpenChange={(open) => {
+          if (!open) {
+            setShowResultDialog(false)
+          }
+        }}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Agent Identity Created</DialogTitle>
+          </DialogHeader>
+          {result && (
+            <div className="mt-4 flex flex-col gap-4">
+              <ResultField
+                label="Decentralized Identifier (DID)"
+                value={result.did}
+                fieldKey="did"
+                copiedField={copiedField}
+                onCopy={copyToClipboard}
+                mono
+              />
+              <ResultField
+                label="Wallet Status"
+                value={result.walletStatus}
+                fieldKey="walletStatus"
+                copiedField={copiedField}
+                onCopy={copyToClipboard}
+              />
+              <ResultField
+                label="Wallet ID"
+                value={result.walletId}
+                fieldKey="walletId"
+                copiedField={copiedField}
+                onCopy={copyToClipboard}
+                mono
+              />
+              <ResultField
+                label="Created At"
+                value={new Date(result.timestamp).toLocaleString()}
+                fieldKey="timestamp"
+                copiedField={copiedField}
+                onCopy={copyToClipboard}
+              />
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
@@ -301,7 +407,11 @@ function ResultField({
       <span className="text-xs font-medium text-muted-foreground">{label}</span>
       <div className="flex items-center justify-between rounded-md border border-border bg-secondary px-3 py-2">
         <span
-          className={`truncate text-sm text-foreground ${mono ? "font-mono" : ""}`}
+          className={`text-sm text-foreground ${
+            mono
+              ? "font-mono break-all"
+              : "truncate"
+          }`}
         >
           {value}
         </span>

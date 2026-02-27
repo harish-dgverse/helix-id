@@ -27,6 +27,11 @@ const navItems = [
     icon: Bot,
   },
   {
+    label: "Agents",
+    href: "/dashboard/agents",
+    icon: Activity,
+  },
+  {
     label: "Credentials",
     href: "/dashboard/credentials",
     icon: ShieldCheck,

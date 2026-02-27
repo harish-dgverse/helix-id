@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3005",
     "build": "next build",
     "start": "next start",
     "lint": "eslint ."
@@ -57,7 +57,21 @@
     "sonner": "^1.7.1",
     "tailwind-merge": "^3.3.1",
     "vaul": "^1.1.2",
-    "zod": "^3.24.1"
+    "zod": "^3.24.1",
+    "@digitalbazaar/ed25519-signature-2020": "^5.0.0",
+    "@digitalbazaar/ed25519-verification-key-2020": "^4.0.0",
+    "@digitalbazaar/vc": "^6.0.0",
+    "@hashgraph/sdk": "^2.49.0",
+    "@hiero-did-sdk/client": "^0.1.8",
+    "@hiero-did-sdk/registrar": "^0.1.8",
+    "@hiero-did-sdk/resolver": "^0.1.0",
+    "bs58": "^5.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.4",
+    "ed25519-signature-2020-context": "^1.0.0",
+    "ethers": "^6.10.0",
+    "express": "^4.18.2",
+    "tweetnacl": "^1.0.3"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
