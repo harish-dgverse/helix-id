@@ -24,7 +24,7 @@ BOOKSTORE_API_BASE_URL: str = os.getenv(
 
 # Base URL of the Helix-ID app backend (exposes /api/vp/verify)
 HELIX_ID_BACKEND_URL: str = os.getenv(
-    "HELIX_ID_BACKEND_URL", "http://localhost:4000"
+    "HELIX_ID_BACKEND_URL", "http://localhost:3005"
 )
 
 # ---------------------------------------------------------------------------

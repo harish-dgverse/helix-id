@@ -34,6 +34,7 @@ export async function GET(request: Request) {
 
 export async function POST(request: Request) {
   const body = (await request.json()) as Partial<Activity>
+  console.log(body);
   const activity = await readJsonFile<Activity[]>(ACTIVITY_PATH, [])
 
   const entry: Activity = {

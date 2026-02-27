@@ -1,5 +1,717 @@
 [
   {
+    "id": "b15778e0-c8d5-4e3c-a163-7ecd6445cd9e",
+    "timestamp": "2026-02-27T22:37:22.644Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"gfdf\" created with DID did:hedera:testnet:mVhdfNgNk3RNX88o3BNU8mCAB69iovkJ2TTU2wE8d8z_0.0.8051723",
+    "agentId": "7",
+    "agentName": "gfdf",
+    "agentDid": "did:hedera:testnet:mVhdfNgNk3RNX88o3BNU8mCAB69iovkJ2TTU2wE8d8z_0.0.8051723"
+  },
+  {
+    "id": "dffa6bc2-1f3e-45d7-8635-d03da1c04bea",
+    "timestamp": "2026-02-27T22:34:22.133Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "bfdbbdaf-0db7-4325-81e1-c122dfa66357",
+    "timestamp": "2026-02-27T22:34:22.094Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "a85990da-0388-41eb-8877-04958c66991f",
+    "timestamp": "2026-02-27T22:34:20.605Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_9OIzhS0kxbF7Ecrmxgg2rwzv",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "e2ff7d28-d9b2-4cc0-afec-260badd9254b",
+    "timestamp": "2026-02-27T22:34:07.842Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "5c4e24e6-8497-4acd-95c6-60bbe16c29b6",
+    "timestamp": "2026-02-27T22:34:07.795Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "ec85e782-0076-4f91-89ba-c5d8fc1c7919",
+    "timestamp": "2026-02-27T22:34:06.261Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_EazuUxj0JTXJyqsTprTVh3A9",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "a2856d3c-3b61-4dd9-9f6f-e2c1ad4b2b32",
+    "timestamp": "2026-02-27T22:29:24.016Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "00d86a83-8fb6-47cf-b5d0-4151b6f42472",
+    "timestamp": "2026-02-27T22:29:23.989Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "6b04ad8e-800e-4f3d-b79f-2463ece100b8",
+    "timestamp": "2026-02-27T22:29:21.260Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_wBI67tFkEZlySI6Vf4WDpJid",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "30a1e2b0-4392-4e6d-99b6-c75351b5d18e",
+    "timestamp": "2026-02-27T22:29:02.978Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "d23a0c5f-6f0f-41d7-ba0b-80ec7d3dc0f2",
+    "timestamp": "2026-02-27T22:29:02.951Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "69d3a6a4-c4cb-4c8f-b753-a46d795cce4e",
+    "timestamp": "2026-02-27T22:29:00.662Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_qzqxdiARKc6OoybBE8zAbL07",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "74973cc8-f33a-4b81-a4a9-2a4132714196",
+    "timestamp": "2026-02-27T22:28:42.266Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "c212314e-30e0-4b1c-8b2f-1cdd4cffa2d9",
+    "timestamp": "2026-02-27T22:28:42.193Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "e9ee6f9a-daae-4a5d-af09-99f171c9b4ea",
+    "timestamp": "2026-02-27T22:28:39.529Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_gPxjHz9aL6AnxOR3obFdCpuQ",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "18bbf025-6df1-4095-b258-7e83a5ed6440",
+    "timestamp": "2026-02-27T22:25:20.173Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "bc025583-b101-4fcb-bc8e-f6785c83568d",
+    "timestamp": "2026-02-27T22:25:20.149Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "2603509a-b464-4b6b-8804-9266fdc803ab",
+    "timestamp": "2026-02-27T22:25:18.179Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_MU2Y273gpl6FwmrkH5ySpFoI",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "d96e0400-32a0-42b3-9248-a5f527762aa1",
+    "timestamp": "2026-02-27T22:25:03.036Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "da52cef1-415b-4b6d-9273-f70f420d0143",
+    "timestamp": "2026-02-27T22:25:02.993Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "b3447ceb-5696-484c-b0cf-d7473bb3cc4b",
+    "timestamp": "2026-02-27T22:25:00.250Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_ZRGhuoF2Vd06J7vxmrnsyqjK",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "27ca75b6-0961-4b15-92d9-5829da283694",
+    "timestamp": "2026-02-27T22:24:30.262Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "1b08253e-29cd-425d-8544-3d402f63c7f7",
+    "timestamp": "2026-02-27T22:24:30.230Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "d4beb63c-9861-4f6a-b801-30d51ccb89b4",
+    "timestamp": "2026-02-27T22:24:27.499Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_CT6cY46h5z2hpxiFKvwKT0JJ",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "e2dfd07a-56b6-4bbc-9ea3-87d94c512a96",
+    "timestamp": "2026-02-27T22:24:22.496Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "2e9d88a4-c510-4ec8-8799-0cfbbd4111fd",
+    "timestamp": "2026-02-27T22:24:22.468Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "3c1c1c7e-6231-4cfa-a818-25c98ca5870d",
+    "timestamp": "2026-02-27T22:24:19.707Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_flMOivrrQlhJuFs5HJPKzR4g",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "fd1214f2-728d-4c32-96a8-cf9fb3ed6467",
+    "timestamp": "2026-02-27T22:24:11.181Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "8a3dfe48-6168-4b02-8901-ed1b922ffa9e",
+    "timestamp": "2026-02-27T22:24:11.127Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "bb02ce99-0e99-4b07-b3ed-70b974555832",
+    "timestamp": "2026-02-27T22:24:08.518Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_lp1Xw95wju3LKetS4oyRXkJT",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "3db097db-0cb9-46a9-80f7-3dee50b08d1b",
+    "timestamp": "2026-02-27T22:18:26.340Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "d30f4a4f-3c4e-4a1e-911b-043278cff33f",
+    "timestamp": "2026-02-27T22:18:26.311Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "ad830076-4774-40e5-9022-f64eb32e5416",
+    "timestamp": "2026-02-27T22:18:24.521Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_pbJS2BuZrQtZMJu9UY2UCgwV",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "9e6d4174-04a9-429f-8c91-f6fece1fdcea",
+    "timestamp": "2026-02-27T22:18:13.284Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "bd4aba9b-cd46-4913-8ec8-ba2a76118699",
+    "timestamp": "2026-02-27T22:18:13.271Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "63d2aa66-cf0d-4366-b468-52c94d9a307b",
+    "timestamp": "2026-02-27T22:18:11.826Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_hZzEQkt2U3BtZH2QvNWveipF",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "ceee1d9d-3554-47f1-8c01-dd1d5ca63e33",
+    "timestamp": "2026-02-27T22:17:57.646Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "2c42918f-8ddc-43eb-9b5b-07b2d41a2997",
+    "timestamp": "2026-02-27T22:17:57.582Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "80427331-4afc-4f20-b48f-9f629155b414",
+    "timestamp": "2026-02-27T22:17:56.057Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_nLEoZ74LpZl4GwDqIXLmhaxL",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "60a6e8ce-d53b-4f13-b351-0dd8d63128ae",
+    "timestamp": "2026-02-27T22:10:05.767Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "d22e2192-cd61-4a18-ae5e-5fd2e213e3ee",
+    "timestamp": "2026-02-27T22:10:05.750Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "6950ae4e-3a73-46cc-a727-80ffef4f02a0",
+    "timestamp": "2026-02-27T22:10:04.314Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_FRVAk5a2G8VDxKMZLRpM4Kb4",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "2ce6c0ec-a813-4194-8ca6-d37384da8e5a",
+    "timestamp": "2026-02-27T22:09:51.062Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "f5e96606-0a33-408a-a970-ecbd46c98c52",
+    "timestamp": "2026-02-27T22:09:51.032Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "ce4bda39-e6ac-4845-99a1-f355fad2957d",
+    "timestamp": "2026-02-27T22:09:49.613Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_QSv5YPtp5ZOLtgd2LgCS3caz",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "c506a3a7-d9da-44a5-8114-d40023400ba9",
+    "timestamp": "2026-02-27T22:09:37.815Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "ba19b825-8999-4795-af8f-070316b2ab4a",
+    "timestamp": "2026-02-27T22:09:37.718Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "f53db762-6646-4424-8d13-b2e3d9faaf1a",
+    "timestamp": "2026-02-27T22:09:36.264Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_x1r3aQ27ZQuLbE603NRirqzp",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "1221ed80-0048-45dc-a90c-43c9c3bc8374",
+    "timestamp": "2026-02-27T22:05:30.573Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "5f2c4a2d-cd2e-47a0-8179-2cf62e102e38",
+    "timestamp": "2026-02-27T22:05:30.551Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "2642f771-9058-4c81-b7fb-91fce8f9b0b5",
+    "timestamp": "2026-02-27T22:05:29.141Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_ygAE0uDRKrNKCARFxS2i86ps",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "41f1b3ba-7cc4-4005-ab51-f768905739a6",
+    "timestamp": "2026-02-27T22:05:16.746Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "ec99587e-d42c-4033-b36b-564487e4b3e5",
+    "timestamp": "2026-02-27T22:05:16.680Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "d39091da-4f43-4f97-a4e9-9afbf5664276",
+    "timestamp": "2026-02-27T22:05:15.117Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_t2p7nquuWG6g9vM0uqy9aOJH",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "881edf8e-d555-4562-890d-89726d4ff91a",
+    "timestamp": "2026-02-27T22:02:21.023Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "0ffabd94-5e85-49b6-bf06-4f8dfdd02bf0",
+    "timestamp": "2026-02-27T22:02:20.993Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "ac30854a-671b-406b-a794-612fbbde9bfd",
+    "timestamp": "2026-02-27T22:02:19.593Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_FTOk6RfWqYEKVbcAo0aSTsMf",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "5cccecd9-40bb-4096-9dcd-41e133e1fed5",
+    "timestamp": "2026-02-27T22:02:04.909Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
+  },
+  {
+    "id": "90604e10-ea73-47cd-8917-e0f1ea375530",
+    "timestamp": "2026-02-27T22:02:04.887Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "d32bb9c5-1e4a-4174-a58f-e0f48c69ac36",
+    "timestamp": "2026-02-27T22:02:03.333Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_UJIXJcIQ0cWYTHRtXjV5IgWs",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "3da09610-1eec-4aaa-8f4f-f782529e8781",
+    "timestamp": "2026-02-27T22:01:32.883Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "59faadb2-030e-4fbf-a2b2-1f6a50903a2a",
+    "timestamp": "2026-02-27T22:01:32.714Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "bd6c0926-7776-4d9a-866c-bfa5d066b80a",
+    "timestamp": "2026-02-27T22:01:31.249Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_VUESB478yokTdK7u8WqwOiyN",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "e159f016-53b5-4738-9829-0f7956c0fee7",
+    "timestamp": "2026-02-27T21:59:31.582Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "5966a5b0-fe80-45e3-a6ca-4b3885aed8c9",
+    "timestamp": "2026-02-27T21:59:30.147Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_OGwqGhxUx4lPTOwAlBJRhb5w",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "762a2bbf-5ff3-41d7-a11a-123f554690e4",
+    "timestamp": "2026-02-27T21:59:25.739Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "02893447-27f3-4f6f-b730-3c2edc69d591",
+    "timestamp": "2026-02-27T21:59:24.281Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_Q5e5BWhw4F5TUiSnTmyqP5Xz",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "2d612c4e-8570-4b68-b26f-122b6560fc7c",
+    "timestamp": "2026-02-27T21:58:48.581Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "0a108e65-a6ba-4811-bef3-3f7d12a67cb6",
+    "timestamp": "2026-02-27T21:58:46.999Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_Zf6pDnrMUigrZk3SiSAfVsp4",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "93dde69d-2ff1-43bd-9db2-dd8567c37054",
+    "timestamp": "2026-02-27T21:57:53.648Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "ddff59da-3006-4780-b0a4-3eaa69a49277",
+    "timestamp": "2026-02-27T21:57:52.222Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_5VYIVsubjppd1PFY22f2bf5c",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "200d7fe3-03a2-4bdc-b4eb-533c6b1f2a80",
+    "timestamp": "2026-02-27T21:57:48.516Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "67fc9f72-9840-4036-a66d-52cee3c91b96",
+    "timestamp": "2026-02-27T21:57:47.050Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_AtV9b8VO7ElhTaPQVYDRO3kZ",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "31c842a7-e09b-4559-a95b-643d7b67b109",
+    "timestamp": "2026-02-27T21:57:14.318Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'sample-bot-v2'",
+    "holderDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "d6c8a6d4-f671-4240-a324-89c24998d575",
+    "timestamp": "2026-02-27T21:57:12.647Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:5... (On-demand)",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentName": "sample-bot-v2",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "challenge": "auth_call_JJTkpaChCbqSUsTNeXFQVZOM",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "c18d936b-fde4-426d-9db6-7587b6b5bdc0",
+    "timestamp": "2026-02-27T18:30:53.791Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba to agent \"sample-bot-v2\"",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "vcId": "urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba"
+  },
+  {
     "id": "f28bf57c-68bc-4d06-8676-712412dad842",
     "timestamp": "2026-02-27T18:30:53.778Z",
     "type": "VC_ISSUED",
@@ -180,15 +892,5 @@
     "agentName": "New Agent",
     "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
     "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
-  },
-  {
-    "id": "c18d936b-fde4-426d-9db6-7587b6b5bdc0",
-    "timestamp": "2026-02-27T18:30:53.791Z",
-    "type": "VC_ISSUED",
-    "description": "Issued credential urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba to agent \"sample-bot-v2\"",
-    "agentId": "6",
-    "agentName": "sample-bot-v2",
-    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
-    "vcId": "urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba"
   }
 ]

@@ -11,7 +11,7 @@ import httpx
 from config import HELIX_ID_BACKEND_URL
 
 # Endpoint on the Helix-ID backend that verifies a VP token
-_VERIFY_ENDPOINT = f"{HELIX_ID_BACKEND_URL}/api/vp/verify"
+_VERIFY_ENDPOINT = f"{HELIX_ID_BACKEND_URL}/api/vps/verify"
 
 
 async def verify_vp(vp_token: str) -> tuple[bool, str]:

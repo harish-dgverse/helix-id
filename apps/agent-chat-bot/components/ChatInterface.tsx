@@ -57,6 +57,7 @@ export default function ChatInterface() {
   const [currentToolRequests, setCurrentToolRequests] = useState<ToolAuthRequest[]>([]);
   const [isAuthorizing, setIsAuthorizing] = useState(false);
   const [agentDid, setAgentDid] = useState<string>('');
+  // Show authorize modal once per page load when place_order is first requested
   const [hasAuthorizedBooking, setHasAuthorizedBooking] = useState(false);
 
   const ws = useRef<WebSocket | null>(null);
@@ -252,10 +253,6 @@ export default function ChatInterface() {
   };
 
   const authorizeTools = async (requests: ToolAuthRequest[]) => {
-    if (requests.some(req => req.tool === 'place_order')) {
-      setHasAuthorizedBooking(true);
-    }
-
     setIsAuthorizing(true);
     setShowConfirmation(false);
 
@@ -287,6 +284,7 @@ export default function ChatInterface() {
           `Please check that the backend is sending the agent_did in the "connected" message.`
       }]);
       setStatus('Auth failed: Missing agent DID');
+      ws.current?.send(JSON.stringify({ type: 'tool_auth_response', vps: {} }));
       setIsAuthorizing(false);
       return;
     }
@@ -338,6 +336,9 @@ export default function ChatInterface() {
         vps: vps
       }));
 
+      if (requests.some(req => req.tool === 'place_order')) {
+        setHasAuthorizedBooking(true);
+      }
       setStatus('Authorized');
       console.log('✅ Authorization complete - VPs sent to backend');
 
@@ -358,8 +359,9 @@ export default function ChatInterface() {
           `Please ensure the agent has valid credentials.`
       }]);
 
-      // CRITICAL: Do NOT send tool_auth_response if generation failed
-      // This stops the backend from proceeding
+      // Send empty VPs so backend does not hang waiting for tool_auth_response.
+      // Backend will then fail with "VP required" and surface a clear error.
+      ws.current?.send(JSON.stringify({ type: 'tool_auth_response', vps: {} }));
       setStatus(`Auth failed: ${errorMessage}`);
     } finally {
       setIsAuthorizing(false);

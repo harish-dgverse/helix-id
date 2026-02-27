@@ -98,7 +98,7 @@ export default function Dashboard() {
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ book_title: modalBook.title, quantity: orderQty }),
+        body: JSON.stringify({ book_id: modalBook.id, quantity: orderQty }),
       });
       const data = await res.json();
       if (!res.ok) {

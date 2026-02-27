@@ -1,5 +1,19 @@
 [
   {
+    "id": "7",
+    "did": "did:hedera:testnet:mVhdfNgNk3RNX88o3BNU8mCAB69iovkJ2TTU2wE8d8z_0.0.8051723",
+    "name": "gfdf",
+    "walletId": "w7",
+    "status": "active",
+    "createdAt": "2026-02-27T22:37:22.643Z",
+    "permissions": [],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback",
+    "privateKeyString": "302e020100300506032b657004220420557ac05d816defb8d4678bb69e1324282d0c407064457bdd1ef35695e08478a4",
+    "publicKeyString": "302a300506032b65700321000b6601e62d7ac7615f3078e1f32573eb32426d585b6226c7dfe5ae2eb748c747"
+  },
+  {
     "id": "6",
     "did": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
     "name": "sample-bot-v2",
@@ -7,9 +21,9 @@
     "status": "active",
     "createdAt": "2026-02-27T17:50:47.499Z",
     "permissions": [],
-    "externalApiBaseUrl": "http://localhost:6002/",
+    "externalApiBaseUrl": "http://localhost:60026/",
     "externalApiKey": "1234",
-    "agentCallbackUrl": "http://localhost:6002/callback",
+    "agentCallbackUrl": "http://localhost:60026/callback",
     "privateKeyString": "302e020100300506032b6570042204207d49e746b57e2bae00700c85d8cb0b86717336947756fab4bb1eae03a94e569e",
     "publicKeyString": "302a300506032b65700321003c8637a18968e891dd35aa0a3b4da8badb37648f4e77af5aed89a253b7c7aeec"
   },

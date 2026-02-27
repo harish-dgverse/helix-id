@@ -19,9 +19,10 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { book_title, quantity } = body;
+    console.log(body);
+    const { book_id, quantity } = body;
 
-    if (!book_title || !quantity || quantity < 1) {
+    if (!book_id || !quantity || quantity < 1) {
       return NextResponse.json({ error: 'book_title and quantity are required' }, { status: 400 });
     }
 
@@ -29,7 +30,7 @@ export async function POST(request: Request) {
     const booksData = await fs.readFile(booksFilePath, 'utf8');
     const books: { id: string; title: string; author: string; price: number; stock: number }[] = JSON.parse(booksData);
 
-    const book = books.find((b) => b.title === book_title);
+    const book = books.find((b) => b.id == book_id);
     if (!book) {
       return NextResponse.json({ error: 'Book not found' }, { status: 404 });
     }
@@ -47,7 +48,7 @@ export async function POST(request: Request) {
 
     const newOrder = {
       order_id: Math.floor(1000 + Math.random() * 9000),
-      book_title,
+      book_title: book.title,
       quantity,
       total_price: parseFloat((book.price * quantity).toFixed(2)),
       status: 'Order Placed',

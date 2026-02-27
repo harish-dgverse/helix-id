@@ -31,8 +31,8 @@ AZURE_DEPLOYMENT = os.getenv("AZURE_DEPLOYMENT", "gpt-5.2-chat")
 AZURE_API_KEY = os.getenv("AZURE_API_KEY")
 
 # Booking App API
-BOOKING_API_URL = os.getenv("BOOKING_API_URL", "http://localhost:3001/api")
-HELIXID_BACKEND_URL = os.getenv("HELIXID_BACKEND_URL", "http://localhost:4000/api")
+BOOKING_API_URL = os.getenv("BOOKING_API_URL", "http://localhost:3000/api")
+HELIXID_BACKEND_URL = os.getenv("HELIXID_BACKEND_URL", "http://localhost:3005/api")
 
 # Agent Info (the agent this backend represents)
 AGENT_DID = os.getenv("AGENT_DID", "did:hedera:testnet:52vnnEG9pRG4Fy2Qn1yRNFhYvcY5PevKF1sM4NxN4YPh_0.0.7882614")
@@ -84,7 +84,7 @@ async def log_agent_activity(type: str, description: str, metadata: dict = None)
             payload["metadata"]["agent_name"] = AGENT_NAME
             
             await client.post(
-                f"{HELIXID_BACKEND_URL}/activity/log",
+                f"{HELIXID_BACKEND_URL}/activity",
                 json=payload,
                 timeout=2.0
             )
@@ -423,8 +423,10 @@ class AgentSession:
         self.user_id: Optional[str] = None  # Authenticated user ID
         self.user_did: Optional[str] = None  # Authenticated user DID
     
-    async def get_llm_response(self, user_message = None):
-        """Get response from Azure OpenAI, handling conversation history"""
+    async def get_llm_response(self, user_message=None, allow_tools=True):
+        """Get response from Azure OpenAI, handling conversation history.
+        When allow_tools=False (e.g. after a round of tool execution), force a final
+        text-only response so we don't loop another tool_auth_request."""
         if user_message:
             self.conversation_history.append({
                 "role": "user",
@@ -446,20 +448,24 @@ Always confirm with the user before placing an order. Be friendly and helpful.""
             *self.conversation_history
         ]
         
-        # Filter tools based on permissions
-        allowed_tools = [
-            tool for tool in BOOKSTORE_TOOLS 
-            if tool["function"]["name"] in self.permissions
-        ]
-        
-        if not self.permissions:
-            allowed_tools = BOOKSTORE_TOOLS
+        # Filter tools based on permissions (and whether we allow more tool calls this turn)
+        if not allow_tools:
+            allowed_tools = []
+            tool_choice = "none"
+        else:
+            allowed_tools = [
+                tool for tool in BOOKSTORE_TOOLS
+                if tool["function"]["name"] in self.permissions
+            ]
+            if not self.permissions:
+                allowed_tools = BOOKSTORE_TOOLS
+            tool_choice = "auto" if allowed_tools else "none"
             
         response = self.client.chat.completions.create(
             model=AZURE_DEPLOYMENT,
             messages=messages,
             tools=allowed_tools,
-            tool_choice="auto" if allowed_tools else "none",
+            tool_choice=tool_choice,
             max_completion_tokens=4096
         )
         
@@ -752,8 +758,8 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
                                 "result": result[:300]
                             })
                         
-                        # 4. Get next response from LLM (might be more tool calls or final message)
-                        current_message = await agent.get_llm_response()
+                        # 4. Get next response from LLM — force text-only so we don't loop another auth round
+                        current_message = await agent.get_llm_response(allow_tools=False)
                     
                     # Final text response
                     agent.conversation_history.append({
