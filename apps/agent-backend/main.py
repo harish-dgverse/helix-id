@@ -657,6 +657,7 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
                 "user": user_auth.get("user_did", "anonymous"),
                 "agent_did": AGENT_DID,
                 "agent_permissions": agent_permissions,
+                "agent_key":"1234",
                 "tools": [
                     {"name": "search_books", "description": "Search for books by title or author"},
                     {"name": "view_inventory", "description": "View full inventory"},

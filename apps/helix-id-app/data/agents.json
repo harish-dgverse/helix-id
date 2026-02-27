@@ -7,9 +7,9 @@
     "status": "active",
     "createdAt": "2026-02-27T17:50:47.499Z",
     "permissions": [],
-    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiBaseUrl": "http://localhost:6002/",
     "externalApiKey": "1234",
-    "agentCallbackUrl": "http://localhost:3000/callback",
+    "agentCallbackUrl": "http://localhost:6002/callback",
     "privateKeyString": "302e020100300506032b6570042204207d49e746b57e2bae00700c85d8cb0b86717336947756fab4bb1eae03a94e569e",
     "publicKeyString": "302a300506032b65700321003c8637a18968e891dd35aa0a3b4da8badb37648f4e77af5aed89a253b7c7aeec"
   },

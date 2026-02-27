@@ -44,6 +44,8 @@ export default function ChatInterface() {
   const [typing, setTyping] = useState(false);
   const [status, setStatus] = useState('Not connected');
   const [connected, setConnected] = useState(false);
+  const [agentKey, setAgentKey] = useState('');
+
   const [authState, setAuthState] = useState<AuthState>({
     userDid: 'did:hedera:testnet:3gWoENfxywCDMLSEPmrSf5fzE1jkonNjdPpM8Yq8SwaN_0.0.7532608',
     publicKey: '302a300506032b657003210027d6b791faf45707d627b0601ebf99f0aa414beb2b3a1a1f342789751e8601bf',
@@ -149,6 +151,7 @@ export default function ChatInterface() {
 
       ws.current.onmessage = (event) => {
         const data = JSON.parse(event.data);
+        setAgentKey(data.agent_key);
 
         if (data.type === 'status') {
           setStatus(data.message);
@@ -172,7 +175,7 @@ export default function ChatInterface() {
 
           setMessages([{
             role: 'system',
-            content: `✅ Authenticated as ${data.user || 'anonymous'}\n🤖 Agent DID: ${data.agent_did || 'N/A'}\n🛠️ Available tools: ${data.tools.map((t: any) => t.name).join(', ')}`
+            content: `✅ Authenticated as ${data.user || 'anonymous'}\n🛠️ Available tools: ${data.tools.map((t: any) => t.name).join(', ')}`
           }]);
         } else if (data.type === 'tool_auth_request') {
           handleToolAuthRequest(data.requests as ToolAuthRequest[]);
@@ -299,13 +302,13 @@ export default function ChatInterface() {
         setStatus(`Generating VP for ${req.tool}...`);
 
         // Call helixid-backend to generate VP for the required type
-        const encodedAgentDid = encodeURIComponent(currentAgentDid);
-        const vpApiUrl = `http://localhost:4000/api/vps/agent/${encodedAgentDid}?challenge=auth_${req.id}&type=${req.required_vc_type}`;
+        // const encodedAgentDid = encodeURIComponent(currentAgentDid);
+        const externalurl = window.location.host
+        const vpApiUrl = `http://localhost:3005/api/vps/agent?challenge=auth_${req.id}&type=${req.required_vc_type}&external_url=${externalurl}&agentkey=1234`;
 
         console.log(`   📡 Calling VP creation API:`);
         console.log(`      Full URL: ${vpApiUrl}`);
         console.log(`      Agent DID: ${currentAgentDid}`);
-        console.log(`      Encoded Agent DID: ${encodedAgentDid}`);
         console.log(`   🎯 Challenge: auth_${req.id}`);
 
         const response = await fetch(vpApiUrl);
