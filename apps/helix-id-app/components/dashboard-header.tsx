@@ -3,6 +3,7 @@
 import { Bell, Search, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export function DashboardHeader() {
   return (
@@ -17,13 +18,22 @@ export function DashboardHeader() {
         </div>
       </div>
       <div className="flex items-center gap-2">
-        <Button variant="ghost" size="icon" className="relative h-9 w-9 text-muted-foreground hover:text-foreground">
+        <ThemeToggle />
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative h-9 w-9 text-muted-foreground hover:text-foreground"
+        >
           <Bell className="h-4 w-4" />
           <span className="absolute right-1.5 top-1.5 h-2 w-2 rounded-full bg-primary" />
           <span className="sr-only">Notifications</span>
         </Button>
         <div className="h-6 w-px bg-border" />
-        <Button variant="ghost" size="sm" className="gap-2 text-muted-foreground hover:text-foreground">
+        <Button
+          variant="ghost"
+          size="sm"
+          className="gap-2 text-muted-foreground hover:text-foreground"
+        >
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-secondary text-foreground">
             <User className="h-3.5 w-3.5" />
           </div>
@@ -33,3 +43,4 @@ export function DashboardHeader() {
     </header>
   )
 }
+

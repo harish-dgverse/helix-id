@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /* Default to dark theme */
   --background: #0a0a0a;
   --foreground: #fafafa;
   --card: #111111;
@@ -41,6 +42,42 @@
   --success-foreground: #0a0a0a;
   --warning: #eab308;
   --warning-foreground: #0a0a0a;
+}
+
+.light {
+  /* Light theme overrides */
+  --background: #f9fafb;
+  --foreground: #020617;
+  --card: #ffffff;
+  --card-foreground: #020617;
+  --popover: #ffffff;
+  --popover-foreground: #020617;
+  --primary: #f97316;
+  --primary-foreground: #0a0a0a;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #111827;
+  --muted: #e5e7eb;
+  --muted-foreground: #4b5563;
+  --accent: #f97316;
+  --accent-foreground: #0a0a0a;
+  --destructive: #b91c1c;
+  --destructive-foreground: #f9fafb;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #f97316;
+  --chart-1: #f97316;
+  --chart-2: #fb923c;
+  --chart-3: #9ca3af;
+  --chart-4: #6b7280;
+  --chart-5: #4b5563;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111827;
+  --sidebar-primary: #f97316;
+  --sidebar-primary-foreground: #0a0a0a;
+  --sidebar-accent: #f3f4f6;
+  --sidebar-accent-foreground: #111827;
+  --sidebar-border: #e5e7eb;
+  --sidebar-ring: #f97316;
 }
 
 @theme inline {

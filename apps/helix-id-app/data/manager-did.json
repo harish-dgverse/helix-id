@@ -1,0 +1,12 @@
+[
+    {
+      "did": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+      "name": "Platform Manager (Agent)",
+      "created_at": "2026-02-09T20:50:00.000Z",
+      "publicKeyString": "302a300506032b657003210021cf22a499e87d741dc0d9d3e25a2bbf44acd6e692ea6c537cd0bfa71bedd232",
+      "privateKeyString": "302e020100300506032b657004220420d69b6360e53d8680140790acc53a93c17cc84bad0f5cb1a707fd5621805a437b",
+      "publicKeyRaw": "27d6b791faf45707d627b0601ebf99f0aa414beb2b3a1a1f342789751e8601bf",
+      "algorithm": "Ed25519"
+    }
+  ]
+  
