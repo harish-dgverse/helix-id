@@ -1,33 +1,165 @@
 [
   {
-    "id": "7a5e24d2-8c2e-4afc-9968-d4b2b4ce2dd2",
-    "timestamp": "2026-02-13T19:55:24.130Z",
-    "type": "AGENT_CREATED",
-    "description": "New agent \"Test Activity Logger Agent\" created with DID did:hedera:testnet:GoUKhHHYiLnGE1JYSXfvVX52qMdm8Ck6y76UBut1BMi5_0.0.7927171",
-    "agentId": "12",
-    "agentName": "Test Activity Logger Agent",
-    "agentDid": "did:hedera:testnet:GoUKhHHYiLnGE1JYSXfvVX52qMdm8Ck6y76UBut1BMi5_0.0.7927171",
-    "vcId": "urn:uuid:b8d05137-4afa-4e7b-b44d-b0ec8a59b3c7"
-  },
-  {
-    "id": "8eb1cf03-0c40-4aa7-a391-868b5aaebd81",
-    "timestamp": "2026-02-27T12:10:40.362Z",
-    "type": "AGENT_CREATED",
-    "description": "New agent \"New Agent\" created with DID did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
-    "agentId": "2",
-    "agentName": "New Agent",
-    "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
-    "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
-  },
-  {
-    "id": "b66067bb-4995-4ac0-a6b5-11e57924745a",
-    "timestamp": "2026-02-27T12:10:40.362Z",
+    "id": "f28bf57c-68bc-4d06-8676-712412dad842",
+    "timestamp": "2026-02-27T18:30:53.778Z",
     "type": "VC_ISSUED",
-    "description": "Issued credential urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed to agent \"New Agent\"",
+    "description": "Issued DataRetrievalCredential to agent \"sample-bot-v2\"",
+    "vcId": "urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba",
+    "vcType": "DataRetrievalCredential",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278"
+  },
+  {
+    "id": "020cb93a-3c46-4291-bbee-27294b1c65c2",
+    "timestamp": "2026-02-27T18:30:00.358Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:11cd5f71-0b3b-4965-8ecb-78bfdc51067a to agent \"sample-bot-v2\"",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "vcId": "urn:uuid:11cd5f71-0b3b-4965-8ecb-78bfdc51067a"
+  },
+  {
+    "id": "cdd2c4e1-ed6d-4765-9616-381f972b2265",
+    "timestamp": "2026-02-27T18:30:00.347Z",
+    "type": "VC_ISSUED",
+    "description": "Issued EcommerceCredential to agent \"sample-bot-v2\"",
+    "vcId": "urn:uuid:11cd5f71-0b3b-4965-8ecb-78bfdc51067a",
+    "vcType": "EcommerceCredential",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278"
+  },
+  {
+    "id": "04d4f54a-db0b-4d7a-9c04-70a8fd1ac5e2",
+    "timestamp": "2026-02-27T17:51:12.906Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec to agent \"sample-bot-v2\"",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec"
+  },
+  {
+    "id": "e09f1190-dbae-4c35-ad99-4151a53848c0",
+    "timestamp": "2026-02-27T17:51:11.635Z",
+    "type": "VC_ISSUED",
+    "description": "Issued BookOrderingCredential to agent \"sample-bot-v2\"",
+    "vcId": "urn:uuid:81705e93-5549-4a2f-9cd5-5ba40ef670ec",
+    "vcType": "BookOrderingCredential",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278"
+  },
+  {
+    "id": "407fc117-ee98-4bb1-b934-355ea8adabae",
+    "timestamp": "2026-02-27T17:50:47.500Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"sample-bot-v2\" created with DID did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "agentId": "6",
+    "agentName": "sample-bot-v2",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211"
+  },
+  {
+    "id": "e7b3c03f-3ae7-480e-97f9-8b06d77987e1",
+    "timestamp": "2026-02-27T17:42:56.911Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"sample-bot-v1\" created with DID did:hedera:testnet:2WwEKkdoBMZxsZ9dpuNrw7yWekjGH3Qo1qT1hisrzD41_0.0.8050144",
+    "agentId": "5",
+    "agentName": "sample-bot-v1",
+    "agentDid": "did:hedera:testnet:2WwEKkdoBMZxsZ9dpuNrw7yWekjGH3Qo1qT1hisrzD41_0.0.8050144"
+  },
+  {
+    "id": "45a88905-a8e5-4bc6-8ea0-fceaf1993cd5",
+    "timestamp": "2026-02-27T17:41:57.848Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'Test Agent'",
+    "holderDid": "did:hedera:testnet:42ubDg7iWCsGJTemHKEUWDQifEHM3KPHTmQgN5Hofogm_0.0.8050123",
+    "agentName": "Test Agent",
+    "verifier": "helixid.io",
+    "valid": true,
+    "challenge": "auth_req_xyz"
+  },
+  {
+    "id": "af256f2f-b218-49bd-a8e2-95ba5e3a7dc5",
+    "timestamp": "2026-02-27T17:41:51.884Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:4...",
+    "agentDid": "did:hedera:testnet:42ubDg7iWCsGJTemHKEUWDQifEHM3KPHTmQgN5Hofogm_0.0.8050123",
+    "vcId": "urn:uuid:dcc00200-3e09-49c1-ba7c-5877ca593b9c",
+    "challenge": "auth_req_xyz",
+    "domain": "helixid.io"
+  },
+  {
+    "id": "087228fd-6f48-4b56-893c-d0e2b3e5b658",
+    "timestamp": "2026-02-27T17:41:36.309Z",
+    "type": "VC_ISSUED",
+    "description": "Issued BookOrderingCredential to agent \"Test Agent\"",
+    "vcId": "urn:uuid:dcc00200-3e09-49c1-ba7c-5877ca593b9c",
+    "vcType": "BookOrderingCredential",
+    "agentId": "4",
+    "agentName": "Test Agent",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278"
+  },
+  {
+    "id": "71f05e21-78ca-4aba-bd20-4d3b3d31b64e",
+    "timestamp": "2026-02-27T17:41:08.919Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"Test Agent\" created with DID did:hedera:testnet:42ubDg7iWCsGJTemHKEUWDQifEHM3KPHTmQgN5Hofogm_0.0.8050123",
+    "agentId": "4",
+    "agentName": "Test Agent",
+    "agentDid": "did:hedera:testnet:42ubDg7iWCsGJTemHKEUWDQifEHM3KPHTmQgN5Hofogm_0.0.8050123"
+  },
+  {
+    "id": "f0d60242-a891-4ac9-be63-40133afc7441",
+    "timestamp": "2026-02-27T17:38:05.166Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'Test Agent'",
+    "holderDid": "did:hedera:testnet:FgCJQyZWHAeXHg75KnXvYrnKEHXW9Bt9GnL2UAM4zHpb_0.0.8050086",
+    "agentName": "Test Agent",
+    "verifier": "helixid.io",
+    "valid": true,
+    "challenge": "auth_req_xyz"
+  },
+  {
+    "id": "54ad1b54-39d9-4fbf-8004-bb2f9b1a14cc",
+    "timestamp": "2026-02-27T17:37:46.005Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:F...",
+    "agentDid": "did:hedera:testnet:FgCJQyZWHAeXHg75KnXvYrnKEHXW9Bt9GnL2UAM4zHpb_0.0.8050086",
+    "vcId": "urn:uuid:35d3a283-ac1e-409f-80b4-a0c5b350fd9c",
+    "challenge": "auth_req_xyz",
+    "domain": "helixid.io"
+  },
+  {
+    "id": "335c1e39-4495-4414-a83b-52f0b4866716",
+    "timestamp": "2026-02-27T17:37:10.091Z",
+    "type": "VC_ISSUED",
+    "description": "Issued BookOrderingCredential to agent \"Test Agent\"",
+    "vcId": "urn:uuid:35d3a283-ac1e-409f-80b4-a0c5b350fd9c",
+    "vcType": "BookOrderingCredential",
+    "agentId": "3",
+    "agentName": "Test Agent",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278"
+  },
+  {
+    "id": "ba39f750-73bf-4dca-9c7f-319bb117072e",
+    "timestamp": "2026-02-27T17:35:26.904Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"Test Agent\" created with DID did:hedera:testnet:FgCJQyZWHAeXHg75KnXvYrnKEHXW9Bt9GnL2UAM4zHpb_0.0.8050086",
+    "agentId": "3",
+    "agentName": "Test Agent",
+    "agentDid": "did:hedera:testnet:FgCJQyZWHAeXHg75KnXvYrnKEHXW9Bt9GnL2UAM4zHpb_0.0.8050086"
+  },
+  {
+    "id": "588d1d7a-4d6c-405e-bdaa-78efb9c93c2e",
+    "timestamp": "2026-02-27T15:16:22.382Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"book-agent-v1\" created with DID did:hedera:testnet:63a30161-6991-4674-ac31-07ccf5d7d04a",
     "agentId": "2",
-    "agentName": "New Agent",
-    "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
-    "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
+    "agentName": "book-agent-v1",
+    "agentDid": "did:hedera:testnet:63a30161-6991-4674-ac31-07ccf5d7d04a"
   },
   {
     "id": "9c8a519f-73c7-4bdd-8986-e02f50b77289",
@@ -40,73 +172,23 @@
     "vcId": "urn:uuid:457deea6-960f-4eca-a014-0d1fded66fc3"
   },
   {
-    "id": "dd548e1f-88ea-4ce8-9aad-9d2f7c211cc1",
-    "timestamp": "2026-02-27T12:12:19.509Z",
+    "id": "b66067bb-4995-4ac0-a6b5-11e57924745a",
+    "timestamp": "2026-02-27T12:10:40.362Z",
     "type": "VC_ISSUED",
-    "description": "Issued credential urn:uuid:457deea6-960f-4eca-a014-0d1fded66fc3 to agent \"New Agent\"",
-    "agentId": "3",
+    "description": "Issued credential urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed to agent \"New Agent\"",
+    "agentId": "2",
     "agentName": "New Agent",
-    "agentDid": "did:hedera:testnet:839590ad-4888-4314-a868-0a2711822722",
-    "vcId": "urn:uuid:457deea6-960f-4eca-a014-0d1fded66fc3"
+    "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
+    "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
   },
   {
-    "id": "152f138e-4e1a-4fd3-9125-3d2e27e730d2",
-    "timestamp": "2026-02-27T12:24:13.014Z",
-    "type": "AGENT_CREATED",
-    "description": "New agent \"test123\" created with DID did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
-    "agentId": "4",
-    "agentName": "test123",
-    "agentDid": "did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
-    "vcId": "urn:uuid:45307454-bb75-4d20-aff4-092ae280123f"
-  },
-  {
-    "id": "9cb5aa21-1449-4dc1-8f5f-1da31b01a8f9",
-    "timestamp": "2026-02-27T12:24:13.014Z",
+    "id": "c18d936b-fde4-426d-9db6-7587b6b5bdc0",
+    "timestamp": "2026-02-27T18:30:53.791Z",
     "type": "VC_ISSUED",
-    "description": "Issued credential urn:uuid:45307454-bb75-4d20-aff4-092ae280123f to agent \"test123\"",
-    "agentId": "4",
-    "agentName": "test123",
-    "agentDid": "did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
-    "vcId": "urn:uuid:45307454-bb75-4d20-aff4-092ae280123f"
-  },
-  {
-    "id": "b1231588-9ea1-431c-9eaa-ca0c512f98ca",
-    "timestamp": "2026-02-27T12:29:06.015Z",
-    "type": "AGENT_CREATED",
-    "description": "New agent \"dgv\" created with DID did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
-    "agentId": "5",
-    "agentName": "dgv",
-    "agentDid": "did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
-    "vcId": "urn:uuid:6ff0603c-2fe7-408f-860c-a072585d157a"
-  },
-  {
-    "id": "02ab60fa-f221-4216-89df-b4e82f15f5de",
-    "timestamp": "2026-02-27T12:29:06.015Z",
-    "type": "VC_ISSUED",
-    "description": "Issued credential urn:uuid:6ff0603c-2fe7-408f-860c-a072585d157a to agent \"dgv\"",
-    "agentId": "5",
-    "agentName": "dgv",
-    "agentDid": "did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
-    "vcId": "urn:uuid:6ff0603c-2fe7-408f-860c-a072585d157a"
-  },
-  {
-    "id": "3d0e01cf-ea22-4ea0-80c1-f3c462f0a601",
-    "timestamp": "2026-02-27T12:40:19.102Z",
-    "type": "AGENT_CREATED",
-    "description": "New agent \"New Agent\" created with DID did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
+    "description": "Issued credential urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba to agent \"sample-bot-v2\"",
     "agentId": "6",
-    "agentName": "New Agent",
-    "agentDid": "did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
-    "vcId": "urn:uuid:1345f911-c929-4969-a056-2bff2289a86e"
-  },
-  {
-    "id": "90104e2c-1b60-49e3-b5f0-015b577ab37c",
-    "timestamp": "2026-02-27T12:40:19.102Z",
-    "type": "VC_ISSUED",
-    "description": "Issued credential urn:uuid:1345f911-c929-4969-a056-2bff2289a86e to agent \"New Agent\"",
-    "agentId": "6",
-    "agentName": "New Agent",
-    "agentDid": "did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
-    "vcId": "urn:uuid:1345f911-c929-4969-a056-2bff2289a86e"
+    "agentName": "sample-bot-v2",
+    "agentDid": "did:hedera:testnet:55GAXpVqRzme2umePtXv9CD52ztVmH9XdukM96fp6i2w_0.0.8050211",
+    "vcId": "urn:uuid:958d6bb7-86e8-4505-9bb7-21251149b1ba"
   }
 ]

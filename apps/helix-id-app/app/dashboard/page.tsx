@@ -60,6 +60,14 @@ function formatRelative(dateStr: string): string {
   return `${diffD} day${diffD > 1 ? "s" : ""} ago`
 }
 
+function formatActivityType(type: string): string {
+  const map: Record<string, string> = {
+    VC_ISSUED: "VC Issued",
+    AGENT_CREATED: "Agent Created",
+  }
+  return map[type] ?? type.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
+}
+
 export default async function DashboardPage() {
   const [agents, vcs, activity] = await Promise.all([
     readJsonFile<Agent[]>("data/agents.json", []),
@@ -289,10 +297,10 @@ export default async function DashboardPage() {
                     )}
                     <div>
                       <p className="text-sm font-medium text-foreground">
-                        {item.agentName || "Unknown agent"}
+                        {formatActivityType(item.type || "")}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {item.description}
+                        {item.agentName || "Unknown agent"}
                       </p>
                     </div>
                   </div>
@@ -307,7 +315,7 @@ export default async function DashboardPage() {
                           : ""
                       }
                     >
-                      iconApproved ? "Approved" : "Violation"
+                      {iconApproved ? "Approved" : "Violation"}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
                       {formatRelative(item.timestamp)}

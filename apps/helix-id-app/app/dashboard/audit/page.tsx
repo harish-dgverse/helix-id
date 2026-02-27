@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   FileText,
   Search,
@@ -8,20 +8,17 @@ import {
   Filter,
   ShieldCheck,
   CheckCircle2,
-  XCircle,
   AlertTriangle,
-  ExternalLink,
   Eye,
   Fingerprint,
-  Activity,
+  Activity as ActivityIcon,
   Wallet,
   Bot,
 } from "lucide-react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   Select,
   SelectContent,
@@ -29,202 +26,96 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-
-type AuditEntry = {
-  id: string
-  agentDid: string
-  agentName: string
-  credentialUsed: string
-  actionPerformed: string
-  actionScope?: string[]
-  timestamp: string
-  decision: "Approved" | "Rejected"
-  verifierSystem: string
-  hederaRef: string
-  type: "action" | "presentation" | "verification" | "revocation" | "violation"
-}
-
-const auditLogs: AuditEntry[] = [
-  {
-    id: "log-001",
-    agentDid: "did:hedera:mainnet:z6Mk...a4Xq",
-    agentName: "OrderBot-v3",
-    credentialUsed: "vc-001",
-    actionPerformed: "Book order #12847",
-    actionScope: ["search", "place_order", "view_inventory"],
-    timestamp: "2026-02-27T10:30:00Z",
-    decision: "Approved",
-    verifierSystem: "Order Management API",
-    hederaRef: "0.0.1234567",
-    type: "action",
-  },
-  {
-    id: "log-002",
-    agentDid: "did:hedera:mainnet:z6Mk...b8Rw",
-    agentName: "FlightAgent-prod",
-    credentialUsed: "vc-002",
-    actionPerformed: "Present VC to flight booking system",
-    timestamp: "2026-02-27T10:15:00Z",
-    decision: "Approved",
-    verifierSystem: "Flight Booking Gateway",
-    hederaRef: "0.0.1234568",
-    type: "presentation",
-  },
-  {
-    id: "log-003",
-    agentDid: "did:hedera:mainnet:z6Mk...c2Yz",
-    agentName: "DataRetriever-v2",
-    credentialUsed: "vc-003",
-    actionPerformed: "Access HR database - unauthorized scope",
-    timestamp: "2026-02-27T09:45:00Z",
-    decision: "Rejected",
-    verifierSystem: "Internal Data Gateway",
-    hederaRef: "0.0.1234569",
-    type: "violation",
-  },
-  {
-    id: "log-004",
-    agentDid: "did:hedera:mainnet:z6Mk...c2Yz",
-    agentName: "DataRetriever-v2",
-    credentialUsed: "vc-003",
-    actionPerformed: "Credential Revoked by Admin",
-    timestamp: "2026-02-27T09:30:00Z",
-    decision: "Approved",
-    verifierSystem: "HelixID Admin",
-    hederaRef: "0.0.1234570",
-    type: "revocation",
-  },
-  {
-    id: "log-005",
-    agentDid: "did:hedera:mainnet:z6Mk...a4Xq",
-    agentName: "OrderBot-v3",
-    credentialUsed: "vc-001",
-    actionPerformed: "Verify Credential Validity",
-    timestamp: "2026-02-27T09:00:00Z",
-    decision: "Approved",
-    verifierSystem: "Order Management API",
-    hederaRef: "0.0.1234571",
-    type: "verification",
-  },
-  {
-    id: "log-006",
-    agentDid: "did:hedera:mainnet:z6Mk...d9Lm",
-    agentName: "PaymentProcessor",
-    credentialUsed: "vc-004",
-    actionPerformed: "Execute payment $15,000 - over limit",
-    timestamp: "2026-02-27T08:45:00Z",
-    decision: "Rejected",
-    verifierSystem: "Payment Gateway",
-    hederaRef: "0.0.1234572",
-    type: "violation",
-  },
-  {
-    id: "log-007",
-    agentDid: "did:hedera:mainnet:z6Mk...e5Np",
-    agentName: "SupportAgent-v1",
-    credentialUsed: "vc-005",
-    actionPerformed: "Retrieve Customer Record #4521",
-    timestamp: "2026-02-27T08:30:00Z",
-    decision: "Approved",
-    verifierSystem: "CRM System",
-    hederaRef: "0.0.1234573",
-    type: "action",
-  },
-  {
-    id: "log-008",
-    agentDid: "did:hedera:mainnet:z6Mk...b8Rw",
-    agentName: "FlightAgent-prod",
-    credentialUsed: "vc-002",
-    actionPerformed: "Book Flight SFO-ORD",
-    timestamp: "2026-02-27T08:00:00Z",
-    decision: "Approved",
-    verifierSystem: "Flight Booking Gateway",
-    hederaRef: "0.0.1234574",
-    type: "action",
-  },
-  {
-    id: "log-009",
-    agentDid: "did:hedera:mainnet:z6Mk...a4Xq",
-    agentName: "OrderBot-v3",
-    credentialUsed: "vc-001",
-    actionPerformed: "Present VC to Supplier Portal",
-    timestamp: "2026-02-27T07:45:00Z",
-    decision: "Approved",
-    verifierSystem: "Supplier API Gateway",
-    hederaRef: "0.0.1234575",
-    type: "presentation",
-  },
-  {
-    id: "log-010",
-    agentDid: "did:hedera:mainnet:z6Mk...d9Lm",
-    agentName: "PaymentProcessor",
-    credentialUsed: "vc-004",
-    actionPerformed: "Credential Expired - Auto Revoke",
-    timestamp: "2026-02-26T23:59:00Z",
-    decision: "Approved",
-    verifierSystem: "HelixID Scheduler",
-    hederaRef: "0.0.1234576",
-    type: "revocation",
-  },
-]
+import { fetchActivity, type Activity as ActivityEntry } from "@/lib/api"
 
 const typeConfig: Record<
   string,
-  { label: string; color: string; icon: typeof Activity }
+  { label: string; color: string; icon: typeof ActivityIcon }
 > = {
-  action: { label: "Action", color: "text-primary", icon: Activity },
-  presentation: {
-    label: "Presentation",
+  AGENT_CREATED: { label: "Agent Created", color: "text-primary", icon: Bot },
+  VC_ISSUED: {
+    label: "VC Issued",
     color: "text-chart-2",
     icon: ShieldCheck,
   },
-  verification: {
-    label: "Verification",
-    color: "text-chart-4",
-    icon: CheckCircle2,
-  },
-  revocation: { label: "Revocation", color: "text-warning", icon: XCircle },
-  violation: {
+  VIOLATION: {
     label: "Violation",
     color: "text-destructive",
     icon: AlertTriangle,
   },
 }
 
+function getTypeConfig(type: string) {
+  return (
+    typeConfig[type] ?? {
+      label: type,
+      color: "text-muted-foreground",
+      icon: ActivityIcon,
+    }
+  )
+}
+
 export default function AuditPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [typeFilter, setTypeFilter] = useState("all")
-  const [decisionFilter, setDecisionFilter] = useState("all")
   const [complianceMode, setComplianceMode] = useState(false)
-  const [selectedLogId, setSelectedLogId] = useState<string | null>(
-    auditLogs[0]?.id ?? null
-  )
+  const [activity, setActivity] = useState<ActivityEntry[]>([])
+  const [loading, setLoading] = useState(true)
 
-  const filteredLogs = auditLogs.filter((log) => {
+  useEffect(() => {
+    async function load() {
+      try {
+        const data = await fetchActivity()
+        setActivity(data)
+      } catch (err) {
+        console.error("Failed to load audit data", err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    load()
+  }, [])
+
+  const filteredLogs = activity.filter((log) => {
     if (typeFilter !== "all" && log.type !== typeFilter) return false
-    if (decisionFilter !== "all" && log.decision !== decisionFilter)
-      return false
     if (
       searchQuery &&
-      !log.agentName.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !log.actionPerformed.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !log.agentDid.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !log.credentialUsed.toLowerCase().includes(searchQuery.toLowerCase())
+      !(log.agentName || "").toLowerCase().includes(searchQuery.toLowerCase()) &&
+      !log.description.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      !(log.agentDid || "").toLowerCase().includes(searchQuery.toLowerCase()) &&
+      !(log.vcId || "").toLowerCase().includes(searchQuery.toLowerCase())
     )
       return false
     return true
   })
 
-  const totalLogs = auditLogs.length
-  const violations = auditLogs.filter((l) => l.type === "violation").length
-  const revocations = auditLogs.filter((l) => l.type === "revocation").length
-  const presentations = auditLogs.filter(
-    (l) => l.type === "presentation"
+  const totalLogs = activity.length
+  const violations = activity.filter((l) =>
+    (l.type || "").toUpperCase().includes("VIOLATION")
   ).length
+  const vcIssued = activity.filter((l) => l.type === "VC_ISSUED").length
+  const agentCreated = activity.filter((l) => l.type === "AGENT_CREATED").length
+
+  if (loading) {
+    return (
+      <div className="flex flex-col gap-6">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+            Audit & Governance
+          </h1>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Immutable activity logs, compliance tracking, and DLT-anchored
+            records.
+          </p>
+        </div>
+        <p className="text-sm text-muted-foreground">Loading...</p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight text-foreground">
             Audit & Governance
@@ -267,7 +158,6 @@ export default function AuditPage() {
         </div>
       </div>
 
-      {/* Stats */}
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         {[
           {
@@ -276,15 +166,14 @@ export default function AuditPage() {
             icon: FileText,
           },
           {
-            label: "Credential Presentations",
-            value: presentations,
+            label: "Credential Issued",
+            value: vcIssued,
             icon: ShieldCheck,
           },
           {
-            label: "Revocation Events",
-            value: revocations,
-            icon: XCircle,
-            color: "text-warning",
+            label: "Agents Created",
+            value: agentCreated,
+            icon: Bot,
           },
           {
             label: "Policy Violations",
@@ -313,7 +202,6 @@ export default function AuditPage() {
         ))}
       </div>
 
-      {/* Trust Architecture */}
       {complianceMode && (
         <Card className="border-primary/20 bg-card">
           <CardContent className="p-5">
@@ -346,7 +234,6 @@ export default function AuditPage() {
         </Card>
       )}
 
-      {/* Filters */}
       <div className="flex flex-wrap items-center gap-3">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
@@ -365,70 +252,59 @@ export default function AuditPage() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="action">Actions</SelectItem>
-              <SelectItem value="presentation">Presentations</SelectItem>
-              <SelectItem value="verification">Verifications</SelectItem>
-              <SelectItem value="revocation">Revocations</SelectItem>
-              <SelectItem value="violation">Violations</SelectItem>
-            </SelectContent>
-          </Select>
-          <Select value={decisionFilter} onValueChange={setDecisionFilter}>
-            <SelectTrigger className="h-9 w-36 bg-secondary">
-              <SelectValue placeholder="Decision" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Decisions</SelectItem>
-              <SelectItem value="Approved">Approved</SelectItem>
-              <SelectItem value="Rejected">Rejected</SelectItem>
+              <SelectItem value="AGENT_CREATED">Agent Created</SelectItem>
+              <SelectItem value="VC_ISSUED">VC Issued</SelectItem>
+              <SelectItem value="VIOLATION">Violations</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
 
-      {/* Audit Log Table + Detail */}
-      <div className="flex flex-col gap-4">
-        <Card className="border-border bg-card">
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-border">
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Type
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Agent
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Action
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Decision
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Verifier
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                      Timestamp
-                    </th>
+      <Card className="border-border bg-card">
+        <CardContent className="p-0">
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Type
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Agent
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Description
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Credential
+                  </th>
+                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                    Timestamp
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredLogs.length === 0 ? (
+                  <tr>
+                    <td
+                      colSpan={5}
+                      className="px-4 py-8 text-center text-sm text-muted-foreground"
+                    >
+                      No audit entries yet.
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {filteredLogs.map((log) => {
-                    const config = typeConfig[log.type]
+                ) : (
+                  filteredLogs.map((log) => {
+                    const config = getTypeConfig(log.type)
                     const TypeIcon = config.icon
-                    const isViolation = log.type === "violation"
-                    const isSelected = log.id === selectedLogId
+                    const isViolation = (log.type || "")
+                      .toUpperCase()
+                      .includes("VIOLATION")
                     return (
                       <tr
                         key={log.id}
-                        onClick={() => setSelectedLogId(log.id)}
-                        className={`cursor-pointer border-b border-border last:border-0 transition-colors ${
-                          isViolation
-                            ? "bg-destructive/5"
-                            : isSelected
-                              ? "bg-primary/5"
-                              : "hover:bg-secondary"
+                        className={`border-b border-border last:border-0 ${
+                          isViolation ? "bg-destructive/5" : "hover:bg-secondary"
                         }`}
                       >
                         <td className="px-4 py-3">
@@ -447,167 +323,35 @@ export default function AuditPage() {
                         <td className="px-4 py-3">
                           <div className="flex flex-col">
                             <span className="text-sm text-foreground">
-                              {log.agentName}
+                              {log.agentName ?? "—"}
                             </span>
                             <span className="font-mono text-xs text-muted-foreground">
-                              {log.agentDid}
+                              {log.agentDid ?? "—"}
                             </span>
                           </div>
                         </td>
-                        <td className="max-w-56 px-4 py-3 text-sm text-foreground">
-                          {log.actionPerformed}
-                          {log.actionScope && log.actionScope.length > 0 && (
-                            <div className="mt-1 flex flex-wrap gap-1">
-                              {log.actionScope.map((s) => (
-                                <span
-                                  key={s}
-                                  className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
-                                >
-                                  {s}
-                                </span>
-                              ))}
-                            </div>
-                          )}
+                        <td className="max-w-56 px-4 py-3 text-sm text-foreground break-words whitespace-normal">
+                          {log.description}
                         </td>
-                        <td className="px-4 py-3">
-                          <Badge
-                            variant={
-                              log.decision === "Approved"
-                                ? "default"
-                                : "destructive"
-                            }
-                            className={
-                              log.decision === "Approved"
-                                ? "bg-success/10 text-success hover:bg-success/10"
-                                : ""
-                            }
-                          >
-                            {log.decision}
-                          </Badge>
-                        </td>
-                        <td className="px-4 py-3 text-sm text-muted-foreground">
-                          {log.verifierSystem}
+                        <td className="px-4 py-3 font-mono text-xs text-muted-foreground">
+                          {log.vcId ?? "—"}
                         </td>
                         <td className="px-4 py-3 text-sm text-muted-foreground">
                           {new Date(log.timestamp).toLocaleString()}
                         </td>
                       </tr>
                     )
-                  })}
-                </tbody>
-              </table>
-            </div>
-          </CardContent>
-        </Card>
+                  })
+                )}
+              </tbody>
+            </table>
+          </div>
+        </CardContent>
+      </Card>
 
-        {filteredLogs.length > 0 && selectedLogId && (
-          <Card className="border-border bg-card">
-            <CardHeader>
-              <CardTitle className="text-sm font-medium text-foreground">
-                Action details
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-3 text-sm">
-              {(() => {
-                const log =
-                  filteredLogs.find((l) => l.id === selectedLogId) ??
-                  filteredLogs[0]
-                const config = typeConfig[log.type]
-                const TypeIcon = config.icon
-                return (
-                  <>
-                    <div className="flex items-center gap-2">
-                      <TypeIcon
-                        className={`h-4 w-4 ${config.color}`}
-                      />
-                      <Badge
-                        variant="outline"
-                        className={`text-xs ${config.color} border-current/20`}
-                      >
-                        {config.label}
-                      </Badge>
-                      <Badge
-                        className={
-                          log.decision === "Approved"
-                            ? "ml-1 bg-success/10 text-success hover:bg-success/10"
-                            : "ml-1 bg-destructive/10 text-destructive hover:bg-destructive/10"
-                        }
-                      >
-                        {log.decision}
-                      </Badge>
-                    </div>
-
-                    <div className="grid gap-2 text-xs text-muted-foreground md:grid-cols-2">
-                      <div>
-                        <p className="font-medium text-foreground">
-                          Agent
-                        </p>
-                        <p>{log.agentName}</p>
-                        <p className="font-mono">
-                          {log.agentDid}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          Credential used
-                        </p>
-                        <p className="font-mono">{log.credentialUsed}</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          Verifier system
-                        </p>
-                        <p>{log.verifierSystem}</p>
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          Hedera reference
-                        </p>
-                        <div className="flex items-center gap-1 font-mono">
-                          <span>{log.hederaRef}</span>
-                          <ExternalLink className="h-3 w-3 text-muted-foreground" />
-                        </div>
-                      </div>
-                      <div>
-                        <p className="font-medium text-foreground">
-                          Timestamp
-                        </p>
-                        <p>
-                          {new Date(log.timestamp).toLocaleString()}
-                        </p>
-                      </div>
-                    </div>
-
-                    <div className="mt-1 flex flex-col gap-1 text-xs text-muted-foreground">
-                      <p className="font-medium text-foreground">
-                        Action performed
-                      </p>
-                      <p>{log.actionPerformed}</p>
-                      {log.actionScope && log.actionScope.length > 0 && (
-                        <div className="mt-1 flex flex-wrap gap-1">
-                          {log.actionScope.map((s) => (
-                            <span
-                              key={s}
-                              className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
-                            >
-                              {s}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </>
-                )
-              })()}
-            </CardContent>
-          </Card>
-        )}
-      </div>
-
-      {/* Footer info */}
       <div className="flex items-center justify-between text-xs text-muted-foreground">
         <span>
-          Showing {filteredLogs.length} of {auditLogs.length} entries
+          Showing {filteredLogs.length} of {activity.length} entries
         </span>
         <span>
           All records are immutably anchored to Hedera Distributed Ledger

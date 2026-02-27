@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useState } from "react"
 import {
   Bot,
   Fingerprint,
@@ -29,9 +29,9 @@ type OnboardingResult = {
   walletStatus: string
   walletId: string
   timestamp: string
+  name: string
+  organization: string
 }
-
-import type { OnboardedAgent } from "@/lib/agents"
 
 const pipelineSteps = [
   { icon: Bot, label: "Agent Registered" },
@@ -46,15 +46,16 @@ export default function OnboardingPage() {
   const [currentStep, setCurrentStep] = useState(-1)
   const [result, setResult] = useState<OnboardingResult | null>(null)
   const [copiedField, setCopiedField] = useState<string | null>(null)
-  const [agents, setAgents] = useState<OnboardedAgent[]>([])
-  const [selectedAgentId, setSelectedAgentId] = useState<string | null>(null)
 
   const [agentName, setAgentName] = useState("")
   const [organization, setOrganization] = useState("")
 
   const [showResultDialog, setShowResultDialog] = useState(false)
+  const [hasClickedOnboard, setHasClickedOnboard] = useState(false)
 
   const handleOnboard = async () => {
+    if (!agentName.trim()) return
+    setHasClickedOnboard(true)
     setIsOnboarding(true)
     setResult(null)
 
@@ -91,42 +92,19 @@ export default function OnboardingPage() {
 
       const data = await onboardingPromise
       const { agent } = data
+      const safeName = agentName.trim() || "New Agent"
+      const safeOrg = organization.trim() || "Unassigned"
 
       const newResult: OnboardingResult = {
         did: agent.did,
         walletStatus: "Active",
         walletId: agent.walletId,
         timestamp: agent.createdAt,
+        name: safeName,
+        organization: safeOrg,
       }
 
       setResult(newResult)
-
-      const safeName = agentName.trim() || "New Agent"
-      const safeOrg = organization.trim() || "Unassigned"
-
-      const newAgent: OnboardedAgent = {
-        id: agent.id,
-        name: safeName,
-        organization: safeOrg,
-        did: agent.did,
-        walletId: agent.walletId,
-        createdAt: agent.createdAt,
-        credentials: [
-          {
-            id: "cred-1",
-            type: "Agent Identity Credential",
-            status: "Active",
-          },
-          {
-            id: "cred-2",
-            type: "Access Policy Credential",
-            status: "Active",
-          },
-        ],
-      }
-
-      setAgents((prev) => [...prev, newAgent])
-      setSelectedAgentId(agent.id)
       setShowResultDialog(true)
     } catch (error) {
       console.error("Onboarding failed", error)
@@ -140,14 +118,6 @@ export default function OnboardingPage() {
     setCopiedField(field)
     setTimeout(() => setCopiedField(null), 2000)
   }
-
-  const selectedAgent = useMemo(
-    () =>
-      agents.find((a) => a.id === selectedAgentId) ||
-      agents[agents.length - 1] ||
-      null,
-    [agents, selectedAgentId]
-  )
 
   return (
     <div className="flex flex-col gap-6">
@@ -233,7 +203,7 @@ export default function OnboardingPage() {
 
             <Button
               onClick={handleOnboard}
-              disabled={isOnboarding}
+              disabled={!agentName.trim() || isOnboarding}
               className="mt-2 bg-primary text-primary-foreground hover:bg-primary/90"
             >
               {isOnboarding ? (
@@ -248,9 +218,9 @@ export default function OnboardingPage() {
           </CardContent>
         </Card>
 
-        {/* Middle Column: Pipeline + Results */}
+        {/* Middle Column: Pipeline (visible only after Onboard Agent clicked) */}
         <div className="flex flex-col gap-6">
-          {/* Pipeline Visualization */}
+          {(hasClickedOnboard || isOnboarding || result !== null) && (
           <Card className="border-border bg-card">
             <CardHeader>
               <CardTitle className="text-sm font-medium text-foreground">
@@ -303,51 +273,12 @@ export default function OnboardingPage() {
               </div>
             </CardContent>
           </Card>
+          )}
 
         </div>
-        {/* Right Column: Agents sidebar (only after onboarding in this session) */}
-        {agents.length > 0 && (
-        <div id="agents" className="flex flex-col gap-6">
-          <Card className="border-border bg-card">
-            <CardHeader>
-              <CardTitle className="text-sm font-medium text-foreground">
-                Agents
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-col gap-4">
-                <div className="flex flex-col gap-3">
-                  {agents.map((agent) => {
-                    const isSelected = selectedAgent?.id === agent.id
-                    return (
-                      <button
-                        key={agent.id}
-                        type="button"
-                        onClick={() => setSelectedAgentId(agent.id)}
-                        className={`flex flex-col items-start rounded-md border px-3 py-2 text-left text-sm transition-colors ${
-                          isSelected
-                            ? "border-primary bg-primary/5 text-foreground"
-                            : "border-border bg-secondary text-muted-foreground hover:bg-secondary/80 hover:text-foreground"
-                        }`}
-                      >
-                        <span className="font-medium">{agent.name}</span>
-                        <span className="text-xs">
-                          Org:{" "}
-                          <span className="font-medium">
-                            {agent.organization}
-                          </span>
-                        </span>
-                        <span className="mt-1 text-xs text-muted-foreground">
-                          Wallet:{" "}
-                          <span className="font-mono">{agent.walletId}</span>
-                        </span>
-                      </button>
-                    )
-                  })}
-                </div>
-            </CardContent>
-          </Card>
-
-          {selectedAgent && (
+        {/* Right Column: Wallet details for the newly created agent */}
+        {result && (
+          <div className="flex flex-col gap-6">
             <Card className="border-border bg-card">
               <CardHeader>
                 <CardTitle className="text-sm font-medium text-foreground">
@@ -360,9 +291,9 @@ export default function OnboardingPage() {
                     Attached Agent
                   </span>
                   <span className="text-sm text-foreground">
-                    {selectedAgent.name}{" "}
+                    {result.name}{" "}
                     <span className="text-xs text-muted-foreground">
-                      ({selectedAgent.organization})
+                      ({result.organization})
                     </span>
                   </span>
                 </div>
@@ -371,7 +302,7 @@ export default function OnboardingPage() {
                     Wallet ID
                   </span>
                   <span className="font-mono text-sm text-foreground">
-                    {selectedAgent.walletId}
+                    {result.walletId}
                   </span>
                 </div>
                 <div className="flex flex-col gap-1">
@@ -379,44 +310,28 @@ export default function OnboardingPage() {
                     Agent DID
                   </span>
                   <span className="font-mono text-sm text-foreground">
-                    {selectedAgent.did}
+                    {result.did}
                   </span>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-1">
                   <span className="text-xs font-medium text-muted-foreground">
-                    Credentials in Wallet
+                    Wallet Status
                   </span>
-                  <div className="flex flex-col gap-1">
-                    {selectedAgent.credentials.map((cred) => (
-                      <div
-                        key={cred.id}
-                        className="flex items-center justify-between rounded-md border border-border bg-secondary px-3 py-2 text-sm"
-                      >
-                        <div className="flex flex-col">
-                          <span className="font-medium text-foreground">
-                            {cred.type}
-                          </span>
-                          <span className="text-xs text-muted-foreground">
-                            {cred.id}
-                          </span>
-                        </div>
-                        <Badge
-                          className={
-                            cred.status === "Active"
-                              ? "bg-success/10 text-success hover:bg-success/10"
-                              : "bg-destructive/10 text-destructive hover:bg-destructive/10"
-                          }
-                        >
-                          {cred.status}
-                        </Badge>
-                      </div>
-                    ))}
-                  </div>
+                  <span className="text-sm text-foreground">
+                    {result.walletStatus}
+                  </span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-xs font-medium text-muted-foreground">
+                    Created At
+                  </span>
+                  <span className="text-sm text-foreground">
+                    {new Date(result.timestamp).toLocaleString()}
+                  </span>
                 </div>
               </CardContent>
             </Card>
-          )}
-        </div>
+          </div>
         )}
       </div>
 

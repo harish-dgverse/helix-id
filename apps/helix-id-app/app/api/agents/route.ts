@@ -1,54 +1,84 @@
 import { NextResponse } from "next/server"
-import { readJsonFile, writeJsonFile } from "@/lib/server/json-store"
-import { randomUUID } from "crypto"
-
-const AGENTS_PATH = "data/agents.json"
-
-type Agent = {
-  id: string
-  did: string
-  name: string
-  walletId: string
-  status: string
-  createdAt: string
-  vc_id?: string
-  permissions?: string[]
-  externalApiBaseUrl?: string
-  externalApiKey?: string
-  agentCallbackUrl?: string
-}
+// @ts-ignore
+import { getAgents, saveAgents, logActivity } from "@/lib/db.js"
+import { generateAgentDID } from "@/lib/vc-real.js"
 
 export async function GET() {
-  const agents = await readJsonFile<Agent[]>(AGENTS_PATH, [])
+  const agents = getAgents()
   return NextResponse.json(agents)
 }
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as Partial<Agent>
-  const agents = await readJsonFile<Agent[]>(AGENTS_PATH, [])
+  try {
+    const { name, externalApiBaseUrl, externalApiKey, agentCallbackUrl } =
+      (await request.json()) as {
+        name?: string
+        externalApiBaseUrl?: string
+        externalApiKey?: string
+        agentCallbackUrl?: string
+      }
 
-  const id = body.id ?? String(agents.length + 1)
-  const now = new Date().toISOString()
+    if (!name) {
+      return NextResponse.json(
+        { error: "Agent name is required" },
+        { status: 400 }
+      )
+    }
 
-  const agent: Agent = {
-    id,
-    did:
-      body.did ??
-      `did:hedera:testnet:${randomUUID()}`,
-    name: body.name ?? "New Agent",
-    walletId: body.walletId ?? `w${id}`,
-    status: body.status ?? "active",
-    createdAt: body.createdAt ?? now,
-    vc_id: body.vc_id,
-    permissions: body.permissions ?? [],
-    externalApiBaseUrl: body.externalApiBaseUrl ?? "",
-    externalApiKey: body.externalApiKey ?? "",
-    agentCallbackUrl: body.agentCallbackUrl ?? "",
+    const agents = getAgents()
+    const id = String(agents.length + 1)
+    const walletId = `w${id}`
+
+    // Generate REAL Hedera DID for agent
+    console.log("Generating Hedera DID for agent...")
+    const agentDIDData: any = await generateAgentDID()
+    console.log("Agent DID generated:", agentDIDData.did)
+
+    const now = new Date().toISOString().slice(0, 10)
+
+    // Default permissions for new agents
+    const permissions = [
+      "search_books",
+      "place_order",
+      "view_inventory",
+      "check_order_status",
+    ]
+
+    const newAgent = {
+      id,
+      did: agentDIDData.did,
+      name,
+      walletId,
+      status: "active",
+      createdAt: now,
+      permissions,
+      // Store agent keys
+      privateKeyString: agentDIDData.privateKeyString,
+      publicKeyString: agentDIDData.publicKeyString,
+      externalApiBaseUrl: externalApiBaseUrl || "",
+      externalApiKey: externalApiKey || "",
+      agentCallbackUrl: agentCallbackUrl || "",
+    }
+
+    // Save agent
+    agents.unshift(newAgent)
+    saveAgents(agents)
+
+    // Log activity
+    logActivity({
+      type: "AGENT_CREATED",
+      description: `New agent "${name}" created with DID ${agentDIDData.did}`,
+      metadata: {
+        agentId: id,
+        agentName: name,
+        agentDid: agentDIDData.did,
+      },
+    })
+
+    return NextResponse.json(newAgent, { status: 201 })
+  } catch (error: any) {
+    console.error("Agent creation error:", error)
+    return NextResponse.json({ error: error.message }, { status: 500 })
   }
-
-  const updated = [...agents, agent]
-  await writeJsonFile(AGENTS_PATH, updated)
-
-  return NextResponse.json(agent, { status: 201 })
 }
 
