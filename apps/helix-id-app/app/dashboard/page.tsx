@@ -1,7 +1,7 @@
 import {
   Bot,
   ShieldCheck,
-  Activity,
+  Activity as ActivityIcon,
   AlertTriangle,
   ArrowUpRight,
   ArrowDownRight,
@@ -12,110 +12,122 @@ import {
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { readJsonFile } from "@/lib/server/json-store"
 
-const stats = [
-  {
-    label: "Total Agents",
-    value: "24",
-    change: "+3 this week",
-    trend: "up" as const,
-    icon: Bot,
-  },
-  {
-    label: "Active Credentials",
-    value: "142",
-    change: "+12 this week",
-    trend: "up" as const,
-    icon: ShieldCheck,
-  },
-  {
-    label: "Actions Today",
-    value: "1,847",
-    change: "+23% vs yesterday",
-    trend: "up" as const,
-    icon: Activity,
-  },
-  {
-    label: "Risk Alerts",
-    value: "3",
-    change: "-2 from last week",
-    trend: "down" as const,
-    icon: AlertTriangle,
-  },
-]
+type Agent = {
+  id: string
+  did: string
+  name: string
+  walletId: string
+  status: string
+  createdAt: string
+  vc_id?: string
+}
 
-const recentAgents = [
-  {
-    name: "OrderBot-v3",
-    did: "did:hedera:mainnet:z6Mk...a4Xq",
-    status: "Active",
-    credentials: 5,
-    lastActivity: "2 min ago",
-  },
-  {
-    name: "FlightAgent-prod",
-    did: "did:hedera:mainnet:z6Mk...b8Rw",
-    status: "Active",
-    credentials: 3,
-    lastActivity: "15 min ago",
-  },
-  {
-    name: "DataRetriever-v2",
-    did: "did:hedera:mainnet:z6Mk...c2Yz",
-    status: "Active",
-    credentials: 7,
-    lastActivity: "1 hour ago",
-  },
-  {
-    name: "PaymentProcessor",
-    did: "did:hedera:mainnet:z6Mk...d9Lm",
-    status: "Suspended",
-    credentials: 2,
-    lastActivity: "3 hours ago",
-  },
-  {
-    name: "SupportAgent-v1",
-    did: "did:hedera:mainnet:z6Mk...e5Np",
-    status: "Active",
-    credentials: 4,
-    lastActivity: "30 min ago",
-  },
-]
+type AgentVC = {
+  vc_id: string
+  agent_id: string
+  status: string
+  issued_at: string
+}
 
-const recentActivity = [
-  {
-    agent: "OrderBot-v3",
-    action: "Book Order",
-    result: "Approved",
-    timestamp: "2 min ago",
-  },
-  {
-    agent: "FlightAgent-prod",
-    action: "Book Flight Ticket",
-    result: "Approved",
-    timestamp: "15 min ago",
-  },
-  {
-    agent: "DataRetriever-v2",
-    action: "Access Internal System",
-    result: "Rejected",
-    timestamp: "1 hour ago",
-  },
-  {
-    agent: "PaymentProcessor",
-    action: "Execute Payment",
-    result: "Approved",
-    timestamp: "2 hours ago",
-  },
-  {
-    agent: "SupportAgent-v1",
-    action: "Data Retrieval Access",
-    result: "Approved",
-    timestamp: "3 hours ago",
-  },
-]
+type Activity = {
+  id: string
+  timestamp: string
+  type: string
+  description: string
+  agentName?: string
+}
 
-export default function DashboardPage() {
+type Stat = {
+  label: string
+  value: string
+  change: string
+  trend: "up" | "down"
+  icon: typeof Bot
+}
+
+function formatRelative(dateStr: string): string {
+  const d = new Date(dateStr)
+  if (Number.isNaN(d.getTime())) return dateStr
+  const diffMs = Date.now() - d.getTime()
+  const diffMin = Math.floor(diffMs / 60000)
+  if (diffMin < 1) return "just now"
+  if (diffMin < 60) return `${diffMin} min ago`
+  const diffH = Math.floor(diffMin / 60)
+  if (diffH < 24) return `${diffH} hour${diffH > 1 ? "s" : ""} ago`
+  const diffD = Math.floor(diffH / 24)
+  return `${diffD} day${diffD > 1 ? "s" : ""} ago`
+}
+
+export default async function DashboardPage() {
+  const [agents, vcs, activity] = await Promise.all([
+    readJsonFile<Agent[]>("data/agents.json", []),
+    readJsonFile<AgentVC[]>("data/agent-vcs.json", []),
+    readJsonFile<Activity[]>("data/activity-log.json", []),
+  ])
+
+  const totalAgents = agents.length
+  const activeAgents = agents.filter((a) => a.status === "active").length
+
+  const activeCreds = vcs.filter((vc) => vc.status === "active").length
+
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+  const actionsToday = activity.filter((a) => {
+    const t = new Date(a.timestamp)
+    return !Number.isNaN(t.getTime()) && t >= today
+  }).length
+
+  const riskAlerts = activity.filter((a) =>
+    (a.type || "").toUpperCase().includes("VIOLATION")
+  ).length
+
+  const stats: Stat[] = [
+    {
+      label: "Total Agents",
+      value: String(totalAgents),
+      change: `${activeAgents} active`,
+      trend: "up",
+      icon: Bot,
+    },
+    {
+      label: "Active Credentials",
+      value: String(activeCreds),
+      change: "Based on issued VCs",
+      trend: "up",
+      icon: ShieldCheck,
+    },
+    {
+      label: "Actions Today",
+      value: String(actionsToday),
+      change: "Events in activity log",
+      trend: "up",
+      icon: ActivityIcon,
+    },
+    {
+      label: "Risk Alerts",
+      value: String(riskAlerts),
+      change: "Violations in logs",
+      trend: riskAlerts > 0 ? "up" : "down",
+      icon: AlertTriangle,
+    },
+  ]
+
+  const recentAgents = [...agents]
+    .sort(
+      (a, b) =>
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    )
+    .slice(0, 5)
+
+  const recentActivity = [...activity]
+    .sort(
+      (a, b) =>
+        new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+    )
+    .slice(0, 5)
+
   return (
     <div className="flex flex-col gap-6">
       <div>
@@ -127,7 +139,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* Stats Grid */}
+      {/* Stats Grid - synced with Agents / Credentials / Activity */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat) => (
           <Card key={stat.label} className="border-border bg-card">
@@ -167,7 +179,7 @@ export default function DashboardPage() {
               { icon: Fingerprint, label: "Verifiable Identity (DID)" },
               { icon: ShieldCheck, label: "Scoped Authority (VC)" },
               { icon: Wallet, label: "Proof Before Acting" },
-              { icon: Activity, label: "Continuously Audited" },
+              { icon: ActivityIcon, label: "Continuously Audited" },
               { icon: XCircle, label: "Instantly Revocable" },
             ].map((step, i) => (
               <div key={step.label} className="flex items-center gap-3">
@@ -197,9 +209,15 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="px-5 pb-5">
             <div className="flex flex-col gap-3">
+              {recentAgents.length === 0 && (
+                <p className="text-sm text-muted-foreground">
+                  No agents onboarded yet. Use Agent Onboarding to register a
+                  new agent.
+                </p>
+              )}
               {recentAgents.map((agent) => (
                 <div
-                  key={agent.name}
+                  key={agent.id}
                   className="flex items-center justify-between rounded-md border border-border bg-secondary/50 px-4 py-3"
                 >
                   <div className="flex items-center gap-3">
@@ -218,10 +236,10 @@ export default function DashboardPage() {
                   <div className="flex items-center gap-3">
                     <Badge
                       variant={
-                        agent.status === "Active" ? "default" : "destructive"
+                        agent.status === "active" ? "default" : "destructive"
                       }
                       className={
-                        agent.status === "Active"
+                        agent.status === "active"
                           ? "bg-success/10 text-success hover:bg-success/10"
                           : ""
                       }
@@ -229,7 +247,7 @@ export default function DashboardPage() {
                       {agent.status}
                     </Badge>
                     <span className="text-xs text-muted-foreground">
-                      {agent.lastActivity}
+                      {formatRelative(agent.createdAt)}
                     </span>
                   </div>
                 </div>
@@ -247,45 +265,56 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent className="px-5 pb-5">
             <div className="flex flex-col gap-3">
-              {recentActivity.map((item, i) => (
+              {recentActivity.length === 0 && (
+                <p className="text-sm text-muted-foreground">
+                  No recent activity yet. Once agents begin acting with
+                  credentials, events will appear here.
+                </p>
+              )}
+              {recentActivity.map((item) => {
+                const isViolation = (item.type || "")
+                  .toUpperCase()
+                  .includes("VIOLATION")
+                const iconApproved = !isViolation
+                return (
                 <div
-                  key={i}
+                  key={item.id}
                   className="flex items-center justify-between rounded-md border border-border bg-secondary/50 px-4 py-3"
                 >
                   <div className="flex items-center gap-3">
-                    {item.result === "Approved" ? (
+                    {iconApproved ? (
                       <CheckCircle2 className="h-4 w-4 shrink-0 text-success" />
                     ) : (
                       <XCircle className="h-4 w-4 shrink-0 text-destructive" />
                     )}
                     <div>
                       <p className="text-sm font-medium text-foreground">
-                        {item.action}
+                        {item.agentName || "Unknown agent"}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {item.agent}
+                        {item.description}
                       </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Badge
                       variant={
-                        item.result === "Approved" ? "default" : "destructive"
+                        iconApproved ? "default" : "destructive"
                       }
                       className={
-                        item.result === "Approved"
+                        iconApproved
                           ? "bg-success/10 text-success hover:bg-success/10"
                           : ""
                       }
                     >
-                      {item.result}
+                      iconApproved ? "Approved" : "Violation"
                     </Badge>
                     <span className="text-xs text-muted-foreground">
-                      {item.timestamp}
+                      {formatRelative(item.timestamp)}
                     </span>
                   </div>
                 </div>
-              ))}
+              )})}
             </div>
           </CardContent>
         </Card>

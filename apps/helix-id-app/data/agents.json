@@ -1,0 +1,110 @@
+[
+  {
+    "id": "1",
+    "did": "did:cheqd:testnet:y4ecqjbt",
+    "name": "Book Buyer Agent",
+    "walletId": "w1",
+    "status": "active",
+    "createdAt": "2026-02-09",
+    "vc_id": "vc_1770649942161_llhgqao",
+    "permissions": [
+      "search_books",
+      "place_order",
+      "view_inventory",
+      "check_order_status"
+    ],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback"
+  },
+  {
+    "id": "2",
+    "did": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
+    "name": "New Agent",
+    "walletId": "w2",
+    "status": "active",
+    "createdAt": "2026-02-27T12:10:40.362Z",
+    "vc_id": "vc_1772194240362",
+    "permissions": [
+      "search_books",
+      "view_inventory",
+      "place_order",
+      "check_order_status"
+    ],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback"
+  },
+  {
+    "id": "3",
+    "did": "did:hedera:testnet:839590ad-4888-4314-a868-0a2711822722",
+    "name": "New Agent",
+    "walletId": "w3",
+    "status": "active",
+    "createdAt": "2026-02-27T12:12:19.509Z",
+    "vc_id": "vc_1772194339509",
+    "permissions": [
+      "search_books",
+      "view_inventory",
+      "place_order",
+      "check_order_status"
+    ],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback"
+  },
+  {
+    "id": "4",
+    "did": "did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
+    "name": "test123",
+    "walletId": "w4",
+    "status": "active",
+    "createdAt": "2026-02-27T12:24:13.014Z",
+    "vc_id": "vc_1772195053015",
+    "permissions": [
+      "search_books",
+      "view_inventory",
+      "place_order",
+      "check_order_status"
+    ],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback"
+  },
+  {
+    "id": "5",
+    "did": "did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
+    "name": "dgv",
+    "walletId": "w5",
+    "status": "active",
+    "createdAt": "2026-02-27T12:29:06.015Z",
+    "vc_id": "vc_1772195346015",
+    "permissions": [
+      "search_books",
+      "view_inventory",
+      "place_order",
+      "check_order_status"
+    ],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback"
+  },
+  {
+    "id": "6",
+    "did": "did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
+    "name": "New Agent",
+    "walletId": "w6",
+    "status": "active",
+    "createdAt": "2026-02-27T12:40:19.102Z",
+    "vc_id": "vc_1772196019103",
+    "permissions": [
+      "search_books",
+      "view_inventory",
+      "place_order",
+      "check_order_status"
+    ],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback"
+  }
+]

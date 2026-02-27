@@ -36,6 +36,7 @@ type AuditEntry = {
   agentName: string
   credentialUsed: string
   actionPerformed: string
+  actionScope?: string[]
   timestamp: string
   decision: "Approved" | "Rejected"
   verifierSystem: string
@@ -49,7 +50,8 @@ const auditLogs: AuditEntry[] = [
     agentDid: "did:hedera:mainnet:z6Mk...a4Xq",
     agentName: "OrderBot-v3",
     credentialUsed: "vc-001",
-    actionPerformed: "Book Order #12847",
+    actionPerformed: "Book order #12847",
+    actionScope: ["search", "place_order", "view_inventory"],
     timestamp: "2026-02-27T10:30:00Z",
     decision: "Approved",
     verifierSystem: "Order Management API",
@@ -61,7 +63,7 @@ const auditLogs: AuditEntry[] = [
     agentDid: "did:hedera:mainnet:z6Mk...b8Rw",
     agentName: "FlightAgent-prod",
     credentialUsed: "vc-002",
-    actionPerformed: "Present VC to Flight Booking System",
+    actionPerformed: "Present VC to flight booking system",
     timestamp: "2026-02-27T10:15:00Z",
     decision: "Approved",
     verifierSystem: "Flight Booking Gateway",
@@ -73,7 +75,7 @@ const auditLogs: AuditEntry[] = [
     agentDid: "did:hedera:mainnet:z6Mk...c2Yz",
     agentName: "DataRetriever-v2",
     credentialUsed: "vc-003",
-    actionPerformed: "Access HR Database - Unauthorized Scope",
+    actionPerformed: "Access HR database - unauthorized scope",
     timestamp: "2026-02-27T09:45:00Z",
     decision: "Rejected",
     verifierSystem: "Internal Data Gateway",
@@ -109,7 +111,7 @@ const auditLogs: AuditEntry[] = [
     agentDid: "did:hedera:mainnet:z6Mk...d9Lm",
     agentName: "PaymentProcessor",
     credentialUsed: "vc-004",
-    actionPerformed: "Execute Payment $15,000 - Over Limit",
+    actionPerformed: "Execute payment $15,000 - over limit",
     timestamp: "2026-02-27T08:45:00Z",
     decision: "Rejected",
     verifierSystem: "Payment Gateway",
@@ -194,6 +196,9 @@ export default function AuditPage() {
   const [typeFilter, setTypeFilter] = useState("all")
   const [decisionFilter, setDecisionFilter] = useState("all")
   const [complianceMode, setComplianceMode] = useState(false)
+  const [selectedLogId, setSelectedLogId] = useState<string | null>(
+    auditLogs[0]?.id ?? null
+  )
 
   const filteredLogs = auditLogs.filter((log) => {
     if (typeFilter !== "all" && log.type !== typeFilter) return false
@@ -203,7 +208,8 @@ export default function AuditPage() {
       searchQuery &&
       !log.agentName.toLowerCase().includes(searchQuery.toLowerCase()) &&
       !log.actionPerformed.toLowerCase().includes(searchQuery.toLowerCase()) &&
-      !log.agentDid.toLowerCase().includes(searchQuery.toLowerCase())
+      !log.agentDid.toLowerCase().includes(searchQuery.toLowerCase()) &&
+      !log.credentialUsed.toLowerCase().includes(searchQuery.toLowerCase())
     )
       return false
     return true
@@ -379,115 +385,224 @@ export default function AuditPage() {
         </div>
       </div>
 
-      {/* Audit Log Table */}
-      <Card className="border-border bg-card">
-        <CardContent className="p-0">
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead>
-                <tr className="border-b border-border">
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Type
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Agent DID
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Credential
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Action Performed
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Decision
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Verifier
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Hedera Ref
-                  </th>
-                  <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                    Timestamp
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredLogs.map((log) => {
-                  const config = typeConfig[log.type]
-                  const TypeIcon = config.icon
-                  return (
-                    <tr
-                      key={log.id}
-                      className={`border-b border-border last:border-0 ${
-                        log.type === "violation"
-                          ? "bg-destructive/5"
-                          : ""
-                      }`}
-                    >
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-2">
-                          <TypeIcon className={`h-3.5 w-3.5 ${config.color}`} />
+      {/* Audit Log Table + Detail */}
+      <div className="flex flex-col gap-4">
+        <Card className="border-border bg-card">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-border">
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Type
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Agent
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Action
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Decision
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Verifier
+                    </th>
+                    <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                      Timestamp
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredLogs.map((log) => {
+                    const config = typeConfig[log.type]
+                    const TypeIcon = config.icon
+                    const isViolation = log.type === "violation"
+                    const isSelected = log.id === selectedLogId
+                    return (
+                      <tr
+                        key={log.id}
+                        onClick={() => setSelectedLogId(log.id)}
+                        className={`cursor-pointer border-b border-border last:border-0 transition-colors ${
+                          isViolation
+                            ? "bg-destructive/5"
+                            : isSelected
+                              ? "bg-primary/5"
+                              : "hover:bg-secondary"
+                        }`}
+                      >
+                        <td className="px-4 py-3">
+                          <div className="flex items-center gap-2">
+                            <TypeIcon
+                              className={`h-3.5 w-3.5 ${config.color}`}
+                            />
+                            <Badge
+                              variant="outline"
+                              className={`text-xs ${config.color} border-current/20`}
+                            >
+                              {config.label}
+                            </Badge>
+                          </div>
+                        </td>
+                        <td className="px-4 py-3">
+                          <div className="flex flex-col">
+                            <span className="text-sm text-foreground">
+                              {log.agentName}
+                            </span>
+                            <span className="font-mono text-xs text-muted-foreground">
+                              {log.agentDid}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="max-w-56 px-4 py-3 text-sm text-foreground">
+                          {log.actionPerformed}
+                          {log.actionScope && log.actionScope.length > 0 && (
+                            <div className="mt-1 flex flex-wrap gap-1">
+                              {log.actionScope.map((s) => (
+                                <span
+                                  key={s}
+                                  className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
+                                >
+                                  {s}
+                                </span>
+                              ))}
+                            </div>
+                          )}
+                        </td>
+                        <td className="px-4 py-3">
                           <Badge
-                            variant="outline"
-                            className={`text-xs ${config.color} border-current/20`}
+                            variant={
+                              log.decision === "Approved"
+                                ? "default"
+                                : "destructive"
+                            }
+                            className={
+                              log.decision === "Approved"
+                                ? "bg-success/10 text-success hover:bg-success/10"
+                                : ""
+                            }
                           >
-                            {config.label}
+                            {log.decision}
                           </Badge>
+                        </td>
+                        <td className="px-4 py-3 text-sm text-muted-foreground">
+                          {log.verifierSystem}
+                        </td>
+                        <td className="px-4 py-3 text-sm text-muted-foreground">
+                          {new Date(log.timestamp).toLocaleString()}
+                        </td>
+                      </tr>
+                    )
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+
+        {filteredLogs.length > 0 && selectedLogId && (
+          <Card className="border-border bg-card">
+            <CardHeader>
+              <CardTitle className="text-sm font-medium text-foreground">
+                Action details
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="flex flex-col gap-3 text-sm">
+              {(() => {
+                const log =
+                  filteredLogs.find((l) => l.id === selectedLogId) ??
+                  filteredLogs[0]
+                const config = typeConfig[log.type]
+                const TypeIcon = config.icon
+                return (
+                  <>
+                    <div className="flex items-center gap-2">
+                      <TypeIcon
+                        className={`h-4 w-4 ${config.color}`}
+                      />
+                      <Badge
+                        variant="outline"
+                        className={`text-xs ${config.color} border-current/20`}
+                      >
+                        {config.label}
+                      </Badge>
+                      <Badge
+                        className={
+                          log.decision === "Approved"
+                            ? "ml-1 bg-success/10 text-success hover:bg-success/10"
+                            : "ml-1 bg-destructive/10 text-destructive hover:bg-destructive/10"
+                        }
+                      >
+                        {log.decision}
+                      </Badge>
+                    </div>
+
+                    <div className="grid gap-2 text-xs text-muted-foreground md:grid-cols-2">
+                      <div>
+                        <p className="font-medium text-foreground">
+                          Agent
+                        </p>
+                        <p>{log.agentName}</p>
+                        <p className="font-mono">
+                          {log.agentDid}
+                        </p>
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          Credential used
+                        </p>
+                        <p className="font-mono">{log.credentialUsed}</p>
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          Verifier system
+                        </p>
+                        <p>{log.verifierSystem}</p>
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          Hedera reference
+                        </p>
+                        <div className="flex items-center gap-1 font-mono">
+                          <span>{log.hederaRef}</span>
+                          <ExternalLink className="h-3 w-3 text-muted-foreground" />
                         </div>
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex flex-col">
-                          <span className="text-sm text-foreground">
-                            {log.agentName}
-                          </span>
-                          <span className="font-mono text-xs text-muted-foreground">
-                            {log.agentDid}
-                          </span>
+                      </div>
+                      <div>
+                        <p className="font-medium text-foreground">
+                          Timestamp
+                        </p>
+                        <p>
+                          {new Date(log.timestamp).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-1 flex flex-col gap-1 text-xs text-muted-foreground">
+                      <p className="font-medium text-foreground">
+                        Action performed
+                      </p>
+                      <p>{log.actionPerformed}</p>
+                      {log.actionScope && log.actionScope.length > 0 && (
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {log.actionScope.map((s) => (
+                            <span
+                              key={s}
+                              className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-mono text-muted-foreground"
+                            >
+                              {s}
+                            </span>
+                          ))}
                         </div>
-                      </td>
-                      <td className="px-4 py-3 font-mono text-sm text-muted-foreground">
-                        {log.credentialUsed}
-                      </td>
-                      <td className="max-w-48 px-4 py-3 text-sm text-foreground">
-                        {log.actionPerformed}
-                      </td>
-                      <td className="px-4 py-3">
-                        <Badge
-                          variant={
-                            log.decision === "Approved"
-                              ? "default"
-                              : "destructive"
-                          }
-                          className={
-                            log.decision === "Approved"
-                              ? "bg-success/10 text-success hover:bg-success/10"
-                              : ""
-                          }
-                        >
-                          {log.decision}
-                        </Badge>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-muted-foreground">
-                        {log.verifierSystem}
-                      </td>
-                      <td className="px-4 py-3">
-                        <div className="flex items-center gap-1 font-mono text-sm text-muted-foreground">
-                          {log.hederaRef}
-                          <ExternalLink className="h-3 w-3" />
-                        </div>
-                      </td>
-                      <td className="px-4 py-3 text-sm text-muted-foreground">
-                        {new Date(log.timestamp).toLocaleString()}
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
-        </CardContent>
-      </Card>
+                      )}
+                    </div>
+                  </>
+                )
+              })()}
+            </CardContent>
+          </Card>
+        )}
+      </div>
 
       {/* Footer info */}
       <div className="flex items-center justify-between text-xs text-muted-foreground">

@@ -1,0 +1,112 @@
+[
+  {
+    "id": "7a5e24d2-8c2e-4afc-9968-d4b2b4ce2dd2",
+    "timestamp": "2026-02-13T19:55:24.130Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"Test Activity Logger Agent\" created with DID did:hedera:testnet:GoUKhHHYiLnGE1JYSXfvVX52qMdm8Ck6y76UBut1BMi5_0.0.7927171",
+    "agentId": "12",
+    "agentName": "Test Activity Logger Agent",
+    "agentDid": "did:hedera:testnet:GoUKhHHYiLnGE1JYSXfvVX52qMdm8Ck6y76UBut1BMi5_0.0.7927171",
+    "vcId": "urn:uuid:b8d05137-4afa-4e7b-b44d-b0ec8a59b3c7"
+  },
+  {
+    "id": "8eb1cf03-0c40-4aa7-a391-868b5aaebd81",
+    "timestamp": "2026-02-27T12:10:40.362Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"New Agent\" created with DID did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
+    "agentId": "2",
+    "agentName": "New Agent",
+    "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
+    "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
+  },
+  {
+    "id": "b66067bb-4995-4ac0-a6b5-11e57924745a",
+    "timestamp": "2026-02-27T12:10:40.362Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed to agent \"New Agent\"",
+    "agentId": "2",
+    "agentName": "New Agent",
+    "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
+    "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
+  },
+  {
+    "id": "9c8a519f-73c7-4bdd-8986-e02f50b77289",
+    "timestamp": "2026-02-27T12:12:19.509Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"New Agent\" created with DID did:hedera:testnet:839590ad-4888-4314-a868-0a2711822722",
+    "agentId": "3",
+    "agentName": "New Agent",
+    "agentDid": "did:hedera:testnet:839590ad-4888-4314-a868-0a2711822722",
+    "vcId": "urn:uuid:457deea6-960f-4eca-a014-0d1fded66fc3"
+  },
+  {
+    "id": "dd548e1f-88ea-4ce8-9aad-9d2f7c211cc1",
+    "timestamp": "2026-02-27T12:12:19.509Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:457deea6-960f-4eca-a014-0d1fded66fc3 to agent \"New Agent\"",
+    "agentId": "3",
+    "agentName": "New Agent",
+    "agentDid": "did:hedera:testnet:839590ad-4888-4314-a868-0a2711822722",
+    "vcId": "urn:uuid:457deea6-960f-4eca-a014-0d1fded66fc3"
+  },
+  {
+    "id": "152f138e-4e1a-4fd3-9125-3d2e27e730d2",
+    "timestamp": "2026-02-27T12:24:13.014Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"test123\" created with DID did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
+    "agentId": "4",
+    "agentName": "test123",
+    "agentDid": "did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
+    "vcId": "urn:uuid:45307454-bb75-4d20-aff4-092ae280123f"
+  },
+  {
+    "id": "9cb5aa21-1449-4dc1-8f5f-1da31b01a8f9",
+    "timestamp": "2026-02-27T12:24:13.014Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:45307454-bb75-4d20-aff4-092ae280123f to agent \"test123\"",
+    "agentId": "4",
+    "agentName": "test123",
+    "agentDid": "did:hedera:testnet:cb21438d-a744-4958-b82d-2d035eda03a8",
+    "vcId": "urn:uuid:45307454-bb75-4d20-aff4-092ae280123f"
+  },
+  {
+    "id": "b1231588-9ea1-431c-9eaa-ca0c512f98ca",
+    "timestamp": "2026-02-27T12:29:06.015Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"dgv\" created with DID did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
+    "agentId": "5",
+    "agentName": "dgv",
+    "agentDid": "did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
+    "vcId": "urn:uuid:6ff0603c-2fe7-408f-860c-a072585d157a"
+  },
+  {
+    "id": "02ab60fa-f221-4216-89df-b4e82f15f5de",
+    "timestamp": "2026-02-27T12:29:06.015Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:6ff0603c-2fe7-408f-860c-a072585d157a to agent \"dgv\"",
+    "agentId": "5",
+    "agentName": "dgv",
+    "agentDid": "did:hedera:testnet:db71347b-a440-4514-b2b4-14030567f4ab",
+    "vcId": "urn:uuid:6ff0603c-2fe7-408f-860c-a072585d157a"
+  },
+  {
+    "id": "3d0e01cf-ea22-4ea0-80c1-f3c462f0a601",
+    "timestamp": "2026-02-27T12:40:19.102Z",
+    "type": "AGENT_CREATED",
+    "description": "New agent \"New Agent\" created with DID did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
+    "agentId": "6",
+    "agentName": "New Agent",
+    "agentDid": "did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
+    "vcId": "urn:uuid:1345f911-c929-4969-a056-2bff2289a86e"
+  },
+  {
+    "id": "90104e2c-1b60-49e3-b5f0-015b577ab37c",
+    "timestamp": "2026-02-27T12:40:19.102Z",
+    "type": "VC_ISSUED",
+    "description": "Issued credential urn:uuid:1345f911-c929-4969-a056-2bff2289a86e to agent \"New Agent\"",
+    "agentId": "6",
+    "agentName": "New Agent",
+    "agentDid": "did:hedera:testnet:3cf633f8-78bb-455c-9227-6605acc485db",
+    "vcId": "urn:uuid:1345f911-c929-4969-a056-2bff2289a86e"
+  }
+]
