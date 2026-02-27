@@ -1,0 +1,8 @@
+# Python virtual environment
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Local env file — contains real URLs/secrets, never commit this
+.env
