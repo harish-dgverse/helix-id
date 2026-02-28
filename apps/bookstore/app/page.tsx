@@ -291,6 +291,17 @@ export default function Dashboard() {
         .badge-ok   { background: rgba(74,222,128,0.13); color: #4ade80; border: 1px solid rgba(74,222,128,0.25); }
         .badge-low  { background: rgba(251,191,36,0.13); color: #fbbf24; border: 1px solid rgba(251,191,36,0.25); }
         .badge-out  { background: rgba(248,113,113,0.13); color: #f87171; border: 1px solid rgba(248,113,113,0.25); }
+        .badge-agent {
+          background: linear-gradient(135deg, rgba(129,140,248,0.2) 0%, rgba(192,132,252,0.2) 100%);
+          color: #c7d2fe;
+          border: 1px solid rgba(129,140,248,0.5);
+          box-shadow: 0 0 8px rgba(129,140,248,0.3);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          padding: 0.25rem 0.75rem;
+          font-size: 0.65rem;
+          font-weight: 700;
+        }
 
         /* ── Order Button ── */
         .btn-order {
@@ -615,14 +626,9 @@ export default function Dashboard() {
                         })}
                       </span>
                     </div>
-                    {order.ordered_by && (
-                      <div className="order-row2" style={{ marginTop: "0.2rem" }}>
-                        <span style={{ fontSize: '0.7rem', color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
-                          </svg>
-                          Ordered by: <span style={{ color: order.ordered_by === 'agent' ? '#818cf8' : '#e2e8f0', fontWeight: 500 }}>{order.ordered_by}</span>
-                        </span>
+                    {order.ordered_by === 'agent' && (
+                      <div className="order-row2" style={{ marginTop: "0.4rem" }}>
+                        <span className="badge badge-agent">Agent</span>
                       </div>
                     )}
                   </div>

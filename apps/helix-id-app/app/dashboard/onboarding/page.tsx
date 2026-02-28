@@ -49,6 +49,8 @@ export default function OnboardingPage() {
 
   const [agentName, setAgentName] = useState("")
   const [organization, setOrganization] = useState("")
+  const [agentEndpoint, setAgentEndpoint] = useState("")
+  const [apiKey, setApiKey] = useState("")
 
   const [showResultDialog, setShowResultDialog] = useState(false)
   const [hasClickedOnboard, setHasClickedOnboard] = useState(false)
@@ -63,6 +65,8 @@ export default function OnboardingPage() {
       const payload = {
         name: agentName || "New Agent",
         organization: organization || "Unassigned",
+        agentEndpoint: agentEndpoint || "",
+        apiKey: apiKey || "",
       }
 
       const onboardingPromise = fetch("/api/onboarding", {

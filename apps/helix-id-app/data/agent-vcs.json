@@ -339,5 +339,152 @@
         "proofValue": "z3JDhcG2JLHkWvnPWYNuxiN3LZhmdyM7hHpAxU2W5chx9J17uvV9oB7T11PoJQCwis7PXZWTuaF3GQ42TqPfk3nLh"
       }
     }
+  },
+  {
+    "vc_id": "urn:uuid:38dba963-e7eb-4187-9d2d-76d826b37cb0",
+    "agent_id": "9",
+    "agent_did": "did:hedera:testnet:BmUQuqbvM9v7a3Dgug7xtHKHDYA1o3DBdkkze7kzr2Pi_0.0.8052101",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+    "type": "BookOrderingCredential",
+    "name": "mybook cred",
+    "scopes": [
+      "search_books",
+      "place_order",
+      "view_inventory",
+      "check_order_status"
+    ],
+    "issued_at": "2026-02-28T03:20:27.717Z",
+    "expires_at": "2026-05-29T03:20:27.717Z",
+    "status": "active",
+    "full_vc": {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        "https://helixid.io/contexts/agent-permissions/v1"
+      ],
+      "id": "urn:uuid:38dba963-e7eb-4187-9d2d-76d826b37cb0",
+      "type": [
+        "VerifiableCredential",
+        "BookOrderingCredential"
+      ],
+      "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+      "issuanceDate": "2026-02-28T03:20:27.717Z",
+      "expirationDate": "2026-05-29T03:20:27.717Z",
+      "credentialSubject": {
+        "id": "did:hedera:testnet:BmUQuqbvM9v7a3Dgug7xtHKHDYA1o3DBdkkze7kzr2Pi_0.0.8052101",
+        "name": "mybook cred",
+        "scopes": [
+          "search_books",
+          "place_order",
+          "view_inventory",
+          "check_order_status"
+        ]
+      },
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "created": "2026-02-28T03:20:29Z",
+        "verificationMethod": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278#did-root-key",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "zfXiCXdFhqfZ36tbWUjATCHeeHZoX4F6gvksjbMMAmMLcHBS5dfaNYsqooV7B6xXuHiEBa1ZZDEnv2S2XciPC1sw"
+      }
+    }
+  },
+  {
+    "vc_id": "urn:uuid:624ee812-dbe5-4e5e-86cf-450bfad8a5d5",
+    "agent_id": "10",
+    "agent_did": "did:hedera:testnet:8gXZ6osnrKvfVeXpgsnnuMkGNM8NixTReJPnKtDj7Ruf_0.0.8052105",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+    "type": "BookOrderingCredential",
+    "name": "Book Ordering Credential permissions",
+    "scopes": [
+      "search_books",
+      "place_order",
+      "view_inventory",
+      "check_order_status"
+    ],
+    "issued_at": "2026-02-28T03:29:22.636Z",
+    "expires_at": "2026-05-29T03:29:22.636Z",
+    "status": "active",
+    "full_vc": {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        "https://helixid.io/contexts/agent-permissions/v1"
+      ],
+      "id": "urn:uuid:624ee812-dbe5-4e5e-86cf-450bfad8a5d5",
+      "type": [
+        "VerifiableCredential",
+        "BookOrderingCredential"
+      ],
+      "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+      "issuanceDate": "2026-02-28T03:29:22.636Z",
+      "expirationDate": "2026-05-29T03:29:22.636Z",
+      "credentialSubject": {
+        "id": "did:hedera:testnet:8gXZ6osnrKvfVeXpgsnnuMkGNM8NixTReJPnKtDj7Ruf_0.0.8052105",
+        "name": "Book Ordering Credential permissions",
+        "scopes": [
+          "search_books",
+          "place_order",
+          "view_inventory",
+          "check_order_status"
+        ]
+      },
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "created": "2026-02-28T03:29:23Z",
+        "verificationMethod": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278#did-root-key",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "z5ELU3dS9BiGC9oVz9E74Vmhq2Pu7Po4M6HQJmRH777g43bdE1629BoMhJtZBY7noeYdDPnTayaj1BJsxuGDdMTHb"
+      }
+    }
+  },
+  {
+    "vc_id": "urn:uuid:5838f934-84f9-4a67-90e4-0f6382916f02",
+    "agent_id": "10",
+    "agent_did": "did:hedera:testnet:Bog9FYCfLSt2LoqaXzDUaWdzWZ8FaMtDtD9hy325BxwQ_0.0.8052110",
+    "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+    "type": "BookOrderingCredential",
+    "name": "book cred X",
+    "scopes": [
+      "search_books",
+      "place_order",
+      "view_inventory",
+      "check_order_status"
+    ],
+    "issued_at": "2026-02-28T03:36:11.963Z",
+    "expires_at": "2026-05-29T03:36:11.963Z",
+    "status": "active",
+    "full_vc": {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        "https://helixid.io/contexts/agent-permissions/v1"
+      ],
+      "id": "urn:uuid:5838f934-84f9-4a67-90e4-0f6382916f02",
+      "type": [
+        "VerifiableCredential",
+        "BookOrderingCredential"
+      ],
+      "issuer": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278",
+      "issuanceDate": "2026-02-28T03:36:11.963Z",
+      "expirationDate": "2026-05-29T03:36:11.963Z",
+      "credentialSubject": {
+        "id": "did:hedera:testnet:Bog9FYCfLSt2LoqaXzDUaWdzWZ8FaMtDtD9hy325BxwQ_0.0.8052110",
+        "name": "book cred X",
+        "scopes": [
+          "search_books",
+          "place_order",
+          "view_inventory",
+          "check_order_status"
+        ]
+      },
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "created": "2026-02-28T03:36:12Z",
+        "verificationMethod": "did:hedera:testnet:3GyeSet8RyahYaPyUoSmD9dfftpCmtZDmKwjGdzdBnkq_0.0.7553278#did-root-key",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "z5weysMfaDndLj27xQPWKj5ZRCXgyHyYEA4Z14YEJZu9UqnRGyuyYDdUhokz3w21g52PrTQbAoVNpyCk35u47bzLY"
+      }
+    }
   }
 ]

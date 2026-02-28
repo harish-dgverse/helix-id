@@ -232,7 +232,7 @@ export default function CredentialsPage() {
                       value={selectedAgent}
                       onValueChange={setSelectedAgent}
                     >
-                      <SelectTrigger className="bg-secondary">
+                      <SelectTrigger className="w-[500px] bg-secondary">
                         <SelectValue placeholder="Choose an onboarded agent" />
                       </SelectTrigger>
                       <SelectContent>

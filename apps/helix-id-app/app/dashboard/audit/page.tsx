@@ -38,6 +38,21 @@ const typeConfig: Record<
     color: "text-chart-2",
     icon: ShieldCheck,
   },
+  VP_VERIFIED: {
+    label: "VP Verified",
+    color: "text-chart-2",
+    icon: ShieldCheck
+  },
+  VP_ISSUED: {
+    label: "VP Issued",
+    color: "text-chart-2",
+    icon: ShieldCheck,
+  },
+  AGENT_TOOL_CALL: {
+    label: "Agent Action",
+    color: "text-chart-2",
+    icon: Bot,
+  },
   VIOLATION: {
     label: "Violation",
     color: "text-destructive",

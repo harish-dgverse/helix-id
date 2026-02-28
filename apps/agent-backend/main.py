@@ -36,12 +36,12 @@ HELIXID_BACKEND_URL = os.getenv("HELIXID_BACKEND_URL", "http://localhost:3005/ap
 
 # Agent Info (the agent this backend represents)
 AGENT_DID = os.getenv("AGENT_DID", "did:hedera:testnet:52vnnEG9pRG4Fy2Qn1yRNFhYvcY5PevKF1sM4NxN4YPh_0.0.7882614")
-AGENT_NAME = os.getenv("AGENT_NAME", "BookOrderer AI")
+AGENT_NAME = os.getenv("AGENT_NAME", "BookGenie AI")
 
 # -----------------------------
 # FastAPI setup
 # -----------------------------
-app = FastAPI(title="BookOrderer AI Agent API")
+app = FastAPI(title="BookGenie AI Agent API")
 
 app.add_middleware(
     CORSMiddleware,
@@ -530,15 +530,15 @@ Always confirm with the user before placing an order. Be friendly and helpful.""
         print(f"{'='*60}\n")
         
         # NEW: Log tool execution to helixid-backend
-        await log_agent_activity(
-            type="AGENT_TOOL_CALL",
-            description=f"Agent '{AGENT_NAME}' executing tool '{tool_name}'",
-            metadata={
-                "tool": tool_name,
-                "arguments": tool_args,
-                "session_id": self.session_id
-            }
-        )
+        # await log_agent_activity(
+        #     type="AGENT_TOOL_CALL",
+        #     description=f"Agent '{AGENT_NAME}' executing tool '{tool_name}'",
+        #     metadata={
+        #         "tool": tool_name,
+        #         "arguments": tool_args,
+        #         "session_id": self.session_id
+        #     }
+        # )
         
         # 3. EXECUTE THE ACTUAL TOOL (only after VP verification succeeds)
         print(f"🚀 Executing tool '{tool_name}' with args: {tool_args}")

@@ -420,9 +420,9 @@ export default function ChatInterface() {
       <div className="bg-gradient-to-r from-[#667eea] to-[#764ba2] p-6 text-white shrink-0">
         <div className="flex justify-between items-start">
           <div>
-            <h1 className="text-2xl font-bold">BookOrderer AI</h1>
+            <h1 className="text-2xl font-bold">BookGenie AI</h1>
             <p className="text-white/80 text-sm mt-1">
-              Powered by Verifiable AI (HelixID)
+              Powered by Verifiable AI
               {authState.authenticated && ` • ${authState.userDid.slice(0, 20)}...`}
             </p>
           </div>

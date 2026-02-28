@@ -39,6 +39,7 @@ export async function POST(request: Request) {
       metadata: {
         holderDid: vp.holder,
         agentName,
+        vcId: vp.verifiableCredential[0].id,
         verifier: domain || "Unknown Verifier",
         valid: result.verified,
         challenge,

@@ -62,5 +62,23 @@
     "total_price": 12.5,
     "status": "Order Placed",
     "created_at": "2026-02-27T22:34:22.272Z"
+  },
+  {
+    "order_id": 6698,
+    "book_title": "The Great Gatsby",
+    "quantity": 1,
+    "total_price": 10.99,
+    "status": "Order Placed",
+    "created_at": "2026-02-28T03:30:23.502Z",
+    "ordered_by": "agent"
+  },
+  {
+    "order_id": 7888,
+    "book_title": "Pride and Prejudice",
+    "quantity": 2,
+    "total_price": 17.5,
+    "status": "Order Placed",
+    "created_at": "2026-02-28T04:27:06.505Z",
+    "ordered_by": "agent"
   }
 ]

@@ -1,5 +1,33 @@
 [
   {
+    "id": "10",
+    "did": "did:hedera:testnet:Bog9FYCfLSt2LoqaXzDUaWdzWZ8FaMtDtD9hy325BxwQ_0.0.8052110",
+    "name": "agent X",
+    "walletId": "w10",
+    "status": "active",
+    "createdAt": "2026-02-28T03:35:33.618Z",
+    "permissions": [],
+    "externalApiBaseUrl": "http://localhost:6002/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:6002/callback",
+    "privateKeyString": "302e020100300506032b6570042204203b08718c8af108c985e3f0892fa7fd75e2655a4d9da8ba9997ad49e3c475dcee",
+    "publicKeyString": "302a300506032b6570032100a089d842a90d3542d88ead2907767e219d91ba52d5f5a21d03a1832f6308e6ff"
+  },
+  {
+    "id": "9",
+    "did": "did:hedera:testnet:BmUQuqbvM9v7a3Dgug7xtHKHDYA1o3DBdkkze7kzr2Pi_0.0.8052101",
+    "name": "Agent Z",
+    "walletId": "w9",
+    "status": "active",
+    "createdAt": "2026-02-28T03:19:50.061Z",
+    "permissions": [],
+    "externalApiBaseUrl": "http://localhost:3000/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback",
+    "privateKeyString": "302e020100300506032b6570042204206aa73d934921886ea46f009710f990680c07497835651a90d049d4f823426be5",
+    "publicKeyString": "302a300506032b65700321009ff96b8547d6cb3cc9fe25083afec91748f6b4bb7b401f630ba0cef2fb602b61"
+  },
+  {
     "id": "8",
     "did": "did:hedera:testnet:AP5t2CZyMCKiZPm7wXjzBpjqtGRqSNwFzMGwUR68ARx2_0.0.8051748",
     "name": "Agent X",
@@ -7,7 +35,7 @@
     "status": "active",
     "createdAt": "2026-02-27T22:52:23.218Z",
     "permissions": [],
-    "externalApiBaseUrl": "http://localhost:6002/",
+    "externalApiBaseUrl": "http://localhost:600x/",
     "externalApiKey": "1234",
     "agentCallbackUrl": "http://localhost:3000/callback",
     "privateKeyString": "302e020100300506032b6570042204203e05c585e62e3f058d22d6a5503ccc5e89f72b1fc5ac67b5b1985e91044509b9",
@@ -37,7 +65,7 @@
     "permissions": [],
     "externalApiBaseUrl": "http://localhost:6006/",
     "externalApiKey": "1234",
-    "agentCallbackUrl": "http://localhost:60026/callback",
+    "agentCallbackUrl": "http://localhost:600x6/callback",
     "privateKeyString": "302e020100300506032b6570042204207d49e746b57e2bae00700c85d8cb0b86717336947756fab4bb1eae03a94e569e",
     "publicKeyString": "302a300506032b65700321003c8637a18968e891dd35aa0a3b4da8badb37648f4e77af5aed89a253b7c7aeec"
   },

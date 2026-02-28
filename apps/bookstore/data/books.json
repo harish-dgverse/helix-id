@@ -4,7 +4,7 @@
     "title": "The Great Gatsby",
     "author": "F. Scott Fitzgerald",
     "price": 10.99,
-    "stock": 8
+    "stock": 7
   },
   {
     "id": "2",
@@ -25,6 +25,6 @@
     "title": "Pride and Prejudice",
     "author": "Jane Austen",
     "price": 8.75,
-    "stock": 12
+    "stock": 10
   }
 ]

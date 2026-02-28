@@ -24,11 +24,11 @@ export async function POST(request: Request) {
   const body = (await request.json()) as Partial<{
     name: string
     organization: string
-    externalApiBaseUrl: string
-    externalApiKey: string
+    agentEndpoint: string
+    apiKey: string
     agentCallbackUrl: string
   }>
-
+  console.log(body);
   const agents = getAgents() as Agent[]
 
   const id = String(agents.length + 1)
@@ -49,9 +49,9 @@ export async function POST(request: Request) {
     status: "active",
     createdAt: now,
     permissions: [],
-    externalApiBaseUrl: body.externalApiBaseUrl || "http://localhost:3000/",
-    externalApiKey: body.externalApiKey || "1234",
-    agentCallbackUrl: body.agentCallbackUrl || "http://localhost:3000/callback",
+    externalApiBaseUrl: body.agentEndpoint || "http://localhost:6002/",
+    externalApiKey: body.apiKey || "1234",
+    agentCallbackUrl: body.agentCallbackUrl || "http://localhost:6002/callback",
     privateKeyString: agentDIDData.privateKeyString,
     publicKeyString: agentDIDData.publicKeyString,
   }
