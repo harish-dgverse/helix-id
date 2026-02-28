@@ -129,7 +129,7 @@ As AI agents become decision-makers, they need identity systems built for autono
  
 HelixID provides that foundation.
 
-## Team
-
-Team Name: DgVerse
-Team: Jazeer Ahammed, Harish Haridas, Akhil RS
+## DgVerse Team: 
+- Jazeer Ahammed
+- Harish Haridas
+- Akhil RS
