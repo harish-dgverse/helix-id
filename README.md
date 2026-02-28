@@ -128,3 +128,8 @@ HelixID enables:
 As AI agents become decision-makers, they need identity systems built for autonomy — not humans.
  
 HelixID provides that foundation.
+
+## Team
+
+Team Name: DgVerse
+Team: Jazeer Ahammed, Harish Haridas, Akhil RS
