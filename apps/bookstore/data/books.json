@@ -4,14 +4,14 @@
     "title": "The Great Gatsby",
     "author": "F. Scott Fitzgerald",
     "price": 10.99,
-    "stock": 10
+    "stock": 8
   },
   {
     "id": "2",
     "title": "To Kill a Mockingbird",
     "author": "Harper Lee",
     "price": 12.5,
-    "stock": 5
+    "stock": 4
   },
   {
     "id": "3",

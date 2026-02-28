@@ -302,8 +302,7 @@ async def place_order_tool(book_id: str, quantity: int = 1) -> str:
             response = await client.post(f"{BOOKING_API_URL}/orders", json=payload, timeout=5.0)
             
             if response.status_code == 201:
-                data = response.json()
-                order = data['order']
+                order = response.json()  # API returns the order object directly (no wrapper)
                 return f"Order placed successfully! Order ID: #{order['order_id']}. You ordered {quantity} copy/copies of '{order['book_title']}' for ${order['total_price']}."
             else:
                 try:
@@ -461,6 +460,7 @@ Always confirm with the user before placing an order. Be friendly and helpful.""
                 allowed_tools = BOOKSTORE_TOOLS
             tool_choice = "auto" if allowed_tools else "none"
             
+        print(f"[LLM] get_llm_response(allow_tools={allow_tools}) — tools={len(allowed_tools)}, tool_choice={tool_choice}")
         response = self.client.chat.completions.create(
             model=AZURE_DEPLOYMENT,
             messages=messages,
@@ -469,7 +469,10 @@ Always confirm with the user before placing an order. Be friendly and helpful.""
             max_completion_tokens=4096
         )
         
-        return response.choices[0].message
+        msg = response.choices[0].message
+        if not allow_tools and getattr(msg, "tool_calls", None):
+            print(f"[LLM] API returned {len(msg.tool_calls)} tool_calls despite tool_choice=none (chat loop will break after one round)")
+        return msg
 
     async def execute_tool(self, tool_name, tool_args, vp = None):
         """Verify VP (STRICTLY REQUIRED) and execute tool
@@ -698,9 +701,12 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
                 
                 try:
                     # Loop until we have a final text response (handle multiple rounds of tool calls if needed)
+                    print(f"\n[CHAT] User message received (len={len(user_message or '')})")
                     current_message = await agent.get_llm_response(user_message)
-                    
+                    tool_round = 0
                     while current_message.tool_calls:
+                        tool_round += 1
+                        print(f"\n[CHAT] Tool round #{tool_round} — LLM requested {len(current_message.tool_calls)} tool(s): {[tc.function.name for tc in current_message.tool_calls]}")
                         # 1. Request Authorization/VP for ALL tool calls in this turn
                         tool_auth_requests = []
                         tool_type_map = {
@@ -718,17 +724,20 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
                                 "required_vc_type": tool_type_map.get(tc.function.name, "AgentPermissionCredential")
                             })
                         
+                        print(f"[CHAT] Sending tool_auth_request to frontend ({len(tool_auth_requests)} requests)")
                         await websocket.send_json({
                             "type": "tool_auth_request",
                             "requests": tool_auth_requests
                         })
                         
                         # 2. Wait for UI to respond with VPs
+                        print(f"[CHAT] Waiting for tool_auth_response from frontend...")
                         auth_response = await websocket.receive_json()
                         if auth_response.get("type") != "tool_auth_response":
                             raise Exception("Expected tool_auth_response from UI")
                         
                         vps = auth_response.get("vps", {}) # id -> vp mapping
+                        print(f"[CHAT] Received tool_auth_response — VPs count: {len(vps)}")
                         
                         # 3. Execute tools with VPs
                         self_message_entry = {
@@ -759,38 +768,50 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
                             })
                         
                         # 4. Get next response from LLM — force text-only so we don't loop another auth round
+                        print(f"[CHAT] Tool execution done. Getting final LLM response (allow_tools=False)...")
                         current_message = await agent.get_llm_response(allow_tools=False)
+                        # Force single tool round: exit so we never send a second tool_auth_request
+                        if getattr(current_message, "tool_calls", None):
+                            print(f"[CHAT] WARN: LLM still returned {len(current_message.tool_calls)} tool_calls — single round only, exiting loop")
+                        break
                     
                     # Final text response
+                    final_content = current_message.content or "Done."
+                    print(f"[CHAT] Sending final response to frontend (content len={len(final_content)})")
                     agent.conversation_history.append({
                         "role": "assistant",
-                        "content": current_message.content
+                        "content": final_content
                     })
                     
                     await websocket.send_json({
                         "type": "response",
-                        "content": current_message.content,
+                        "content": final_content,
                         "tool_calls": [] # We don't need to send tool_calls info here as UI already has it from the interactive flow
                     })
                     
                 except Exception as e:
                     print(f"Error in chat loop: {e}")
-                    await websocket.send_json({"type": "error", "message": f"Error: {str(e)}"})
+                    try:
+                        await websocket.send_json({"type": "error", "message": f"Error: {str(e)}"})
+                    except Exception:
+                        print("Could not send error to client (connection may be closed)")
     
     except WebSocketDisconnect:
         if session_id in sessions:
             del sessions[session_id]
-        print(f"Client {session_id} disconnected")
+        print(f"Client {session_id} disconnected (normal)")
     
     except Exception as e:
         print(f"WebSocket error: {e}")
+        import traceback
+        traceback.print_exc()
         try:
             await websocket.send_json({
                 "type": "error",
                 "message": f"Unexpected error: {str(e)}"
             })
-        except:
-            pass
+        except Exception:
+            print("Could not send error to client (connection may be closed)")
         finally:
             if session_id in sessions:
                 del sessions[session_id]
@@ -800,7 +821,17 @@ async def websocket_chat(websocket: WebSocket, session_id: str):
 # Run Server
 # -----------------------------
 if __name__ == "__main__":
+    import signal
     import uvicorn
+
+    def _exit_gracefully(*_):
+        print("\nShutting down gracefully...")
+        sys.exit(0)
+
+    signal.signal(signal.SIGINT, _exit_gracefully)
+    if hasattr(signal, "SIGTERM"):
+        signal.signal(signal.SIGTERM, _exit_gracefully)
+
     print("=" * 60)
     print("📚 BookOrderer AI Agent - Backend Server")
     print("=" * 60)
@@ -808,4 +839,8 @@ if __name__ == "__main__":
     print(f"Deployment: {AZURE_DEPLOYMENT}")
     print(f"Bookstore API: {BOOKING_API_URL}")
     print("=" * 60)
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    try:
+        uvicorn.run(app, host="0.0.0.0", port=8000)
+    except KeyboardInterrupt:
+        print("\nShutting down gracefully...")
+        sys.exit(0)

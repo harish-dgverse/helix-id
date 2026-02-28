@@ -1,5 +1,53 @@
 [
   {
+    "id": "bfc0854d-abe3-411b-8bb4-559cc71de205",
+    "timestamp": "2026-02-27T23:36:43.824Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'Agent X'",
+    "holderDid": "did:hedera:testnet:AP5t2CZyMCKiZPm7wXjzBpjqtGRqSNwFzMGwUR68ARx2_0.0.8051748",
+    "agentName": "Agent X",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "be9628cb-c21b-484b-836f-5444f0af74e3",
+    "timestamp": "2026-02-27T23:36:42.410Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:A... (On-demand)",
+    "agentDid": "did:hedera:testnet:AP5t2CZyMCKiZPm7wXjzBpjqtGRqSNwFzMGwUR68ARx2_0.0.8051748",
+    "agentName": "Agent X",
+    "vcId": "urn:uuid:6db0e578-e0b6-42e7-9c44-9d4d79a6473c",
+    "challenge": "auth_call_A2qVCd3v84eCzU3X6Hbvvy3y",
+    "vcType": "BookOrderingCredential"
+  },
+  {
+    "id": "95529b89-d0c7-4929-b89e-6233c4bc333d",
+    "timestamp": "2026-02-27T23:36:21.655Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'search_books'"
+  },
+  {
+    "id": "9b736032-22b7-4f8a-bcfb-ed166d4e8543",
+    "timestamp": "2026-02-27T23:36:21.642Z",
+    "type": "VP_VERIFIED",
+    "description": "VP verification successful for agent 'Agent X'",
+    "holderDid": "did:hedera:testnet:AP5t2CZyMCKiZPm7wXjzBpjqtGRqSNwFzMGwUR68ARx2_0.0.8051748",
+    "agentName": "Agent X",
+    "verifier": "Unknown Verifier",
+    "valid": true
+  },
+  {
+    "id": "d9cca541-809a-439b-ba58-9ff2b176cb60",
+    "timestamp": "2026-02-27T23:36:20.266Z",
+    "type": "VP_ISSUED",
+    "description": "VP issued for agent DID did:hedera:testnet:A... (On-demand)",
+    "agentDid": "did:hedera:testnet:AP5t2CZyMCKiZPm7wXjzBpjqtGRqSNwFzMGwUR68ARx2_0.0.8051748",
+    "agentName": "Agent X",
+    "vcId": "urn:uuid:6db0e578-e0b6-42e7-9c44-9d4d79a6473c",
+    "challenge": "auth_call_KqnGLQuwNTx3WPttl7T1KJZj",
+    "vcType": "BookOrderingCredential"
+  },
+  {
     "id": "b15778e0-c8d5-4e3c-a163-7ecd6445cd9e",
     "timestamp": "2026-02-27T22:37:22.644Z",
     "type": "AGENT_CREATED",
@@ -892,5 +940,11 @@
     "agentName": "New Agent",
     "agentDid": "did:hedera:testnet:326ce040-1d17-443a-aeaf-efe3e3bbb059",
     "vcId": "urn:uuid:3e2dd4ba-25de-4f0e-853c-9cf04343c8ed"
+  },
+  {
+    "id": "6c705d4c-7ee9-4316-83c2-46d0f1e6f02d",
+    "timestamp": "2026-02-27T23:36:43.838Z",
+    "type": "AGENT_TOOL_CALL",
+    "description": "Agent 'BookOrderer AI' executing tool 'place_order'"
   }
 ]

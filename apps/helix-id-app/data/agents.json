@@ -1,5 +1,19 @@
 [
   {
+    "id": "8",
+    "did": "did:hedera:testnet:AP5t2CZyMCKiZPm7wXjzBpjqtGRqSNwFzMGwUR68ARx2_0.0.8051748",
+    "name": "Agent X",
+    "walletId": "w8",
+    "status": "active",
+    "createdAt": "2026-02-27T22:52:23.218Z",
+    "permissions": [],
+    "externalApiBaseUrl": "http://localhost:6002/",
+    "externalApiKey": "1234",
+    "agentCallbackUrl": "http://localhost:3000/callback",
+    "privateKeyString": "302e020100300506032b6570042204203e05c585e62e3f058d22d6a5503ccc5e89f72b1fc5ac67b5b1985e91044509b9",
+    "publicKeyString": "302a300506032b65700321008b617a4395f7f1212600722061dc38966efdedcf812fda1dcafbe5041e54a04f"
+  },
+  {
     "id": "7",
     "did": "did:hedera:testnet:mVhdfNgNk3RNX88o3BNU8mCAB69iovkJ2TTU2wE8d8z_0.0.8051723",
     "name": "gfdf",
@@ -21,7 +35,7 @@
     "status": "active",
     "createdAt": "2026-02-27T17:50:47.499Z",
     "permissions": [],
-    "externalApiBaseUrl": "http://localhost:60026/",
+    "externalApiBaseUrl": "http://localhost:6006/",
     "externalApiKey": "1234",
     "agentCallbackUrl": "http://localhost:60026/callback",
     "privateKeyString": "302e020100300506032b6570042204207d49e746b57e2bae00700c85d8cb0b86717336947756fab4bb1eae03a94e569e",

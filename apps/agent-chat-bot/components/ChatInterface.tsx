@@ -176,14 +176,17 @@ export default function ChatInterface() {
 
           setMessages([{
             role: 'system',
-            content: `✅ Authenticated as ${data.user || 'anonymous'}\n🛠️ Available tools: ${data.tools.map((t: any) => t.name).join(', ')}`
+            content: `🛠️ Available tools: ${data.tools.map((t: any) => t.name).join(', ')}`
           }]);
         } else if (data.type === 'tool_auth_request') {
-          handleToolAuthRequest(data.requests as ToolAuthRequest[]);
+          const reqs = data.requests as ToolAuthRequest[];
+          console.log('[FRONT] Received tool_auth_request:', reqs.length, 'tool(s):', reqs.map((r: ToolAuthRequest) => r.tool));
+          handleToolAuthRequest(reqs);
         } else if (data.type === 'typing') {
           setTyping(true);
         } else if (data.type === 'response') {
           setTyping(false);
+          console.log('[FRONT] Received final response from backend (conversation turn done)');
 
           const newMessage: Message = {
             role: 'agent',
@@ -193,6 +196,7 @@ export default function ChatInterface() {
 
           setMessages(prev => [...prev, newMessage]);
         } else if (data.type === 'error') {
+          console.log('[FRONT] Received error from backend:', data.message);
           setTyping(false);
           setMessages(prev => [...prev, {
             role: 'system',
@@ -226,7 +230,9 @@ export default function ChatInterface() {
   const handleToolAuthRequest = async (requests: ToolAuthRequest[]) => {
     // Check if any request needs explicit user confirmation
     // Only require confirmation for place_order, and only once
-    const needsConfirmation = requests.some(req => req.tool === 'place_order') && !hasAuthorizedBooking;
+    const hasPlaceOrder = requests.some(req => req.tool === 'place_order');
+    const needsConfirmation = hasPlaceOrder && !hasAuthorizedBooking;
+    console.log('[FRONT] handleToolAuthRequest — tools:', requests.map(r => r.tool), 'hasPlaceOrder:', hasPlaceOrder, 'hasAuthorizedBooking:', hasAuthorizedBooking, '=> showModal:', needsConfirmation);
 
     // Map tool to required VC type
     const tool_type_map: Record<string, string> = {
@@ -244,9 +250,11 @@ export default function ChatInterface() {
     setCurrentToolRequests(updatedRequests);
 
     if (needsConfirmation) {
+      console.log('[FRONT] Showing authorize modal (place_order, first time)');
       setTyping(false);
       setShowConfirmation(true);
     } else {
+      console.log('[FRONT] Auto-authorizing (no modal) — calling authorizeTools');
       // Auto-authorize background tools (search, inventory, etc.)
       authorizeTools(updatedRequests);
     }
@@ -338,9 +346,10 @@ export default function ChatInterface() {
 
       if (requests.some(req => req.tool === 'place_order')) {
         setHasAuthorizedBooking(true);
+        console.log('[FRONT] Set hasAuthorizedBooking=true (place_order authorized this session)');
       }
       setStatus('Authorized');
-      console.log('✅ Authorization complete - VPs sent to backend');
+      console.log('[FRONT] tool_auth_response sent to backend —', Object.keys(vps).length, 'VP(s)');
 
     } catch (error: unknown) {
       const errorMessage = error instanceof Error ? error.message : String(error);
