@@ -19,8 +19,7 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    console.log(body);
-    const { book_id, quantity } = body;
+    const { book_id, quantity, ordered_by } = body;
 
     if (!book_id || !quantity || quantity < 1) {
       return NextResponse.json({ error: 'book_title and quantity are required' }, { status: 400 });
@@ -53,6 +52,7 @@ export async function POST(request: Request) {
       total_price: parseFloat((book.price * quantity).toFixed(2)),
       status: 'Order Placed',
       created_at: new Date().toISOString(),
+      ordered_by,
     };
 
     orders.push(newOrder);

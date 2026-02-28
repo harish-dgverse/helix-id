@@ -18,6 +18,7 @@ interface Order {
   total_price: number;
   status: "Order Placed" | "Processing" | "Shipped" | "Delivered" | "Cancelled";
   created_at: string;
+  ordered_by?: string;
 }
 
 interface User {
@@ -98,7 +99,7 @@ export default function Dashboard() {
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ book_id: modalBook.id, quantity: orderQty }),
+        body: JSON.stringify({ book_id: modalBook.id, quantity: orderQty, "ordered_by": 'user' }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -614,6 +615,16 @@ export default function Dashboard() {
                         })}
                       </span>
                     </div>
+                    {order.ordered_by && (
+                      <div className="order-row2" style={{ marginTop: "0.2rem" }}>
+                        <span style={{ fontSize: '0.7rem', color: '#475569', display: 'flex', alignItems: 'center', gap: '4px' }}>
+                          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" /><circle cx="12" cy="7" r="4" />
+                          </svg>
+                          Ordered by: <span style={{ color: order.ordered_by === 'agent' ? '#818cf8' : '#e2e8f0', fontWeight: 500 }}>{order.ordered_by}</span>
+                        </span>
+                      </div>
+                    )}
                   </div>
                 ))
               )}

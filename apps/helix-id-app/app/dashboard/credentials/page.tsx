@@ -139,7 +139,7 @@ export default function CredentialsPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "VC_ISSUED",
-          description: `Issued credential ${vc.vc_id} to agent "${agent.name}"`,
+          description: `Issued credential ${template.vcType} to agent "${agent.name}"`,
           agentId: agent.id,
           agentName: agent.name,
           agentDid: agent.did,
@@ -338,11 +338,10 @@ export default function CredentialsPage() {
                                         : [...prev, scope]
                                     )
                                   }
-                                  className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-mono transition-colors ${
-                                    active
-                                      ? "border-primary bg-primary text-primary-foreground shadow-sm"
-                                      : "border-border bg-secondary text-muted-foreground hover:border-primary/40 hover:text-foreground"
-                                  }`}
+                                  className={`inline-flex items-center gap-1 rounded-full border px-3 py-1.5 text-xs font-mono transition-colors ${active
+                                    ? "border-primary bg-primary text-primary-foreground shadow-sm"
+                                    : "border-border bg-secondary text-muted-foreground hover:border-primary/40 hover:text-foreground"
+                                    }`}
                                 >
                                   {active && (
                                     <CheckCircle2 className="h-3 w-3 shrink-0" />
@@ -570,9 +569,8 @@ export default function CredentialsPage() {
                           <tr
                             key={vc.vc_id}
                             onClick={() => setSelectedIssuedId(vc.vc_id)}
-                            className={`cursor-pointer border-b border-border last:border-0 transition-colors ${
-                              isSelected ? "bg-primary/5" : "hover:bg-secondary"
-                            }`}
+                            className={`cursor-pointer border-b border-border last:border-0 transition-colors ${isSelected ? "bg-primary/5" : "hover:bg-secondary"
+                              }`}
                           >
                             <td className="px-4 py-3 text-sm text-foreground">
                               {vc.name}

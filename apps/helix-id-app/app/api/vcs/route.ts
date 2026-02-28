@@ -116,17 +116,17 @@ export async function POST(request: Request) {
     saveAgentVCs(vcs)
 
     // Log activity
-    logActivity({
-      type: "VC_ISSUED",
-      description: `Issued ${type} to agent "${agent.name}"`,
-      metadata: {
-        vcId: signedVC.id,
-        vcType: type,
-        agentId: agent.id,
-        agentName: agent.name,
-        issuer: manager.did,
-      },
-    })
+    // logActivity({
+    //   type: "VC_ISSUED",
+    //   description: `Issued ${type} to agent "${agent.name}"`,
+    //   metadata: {
+    //     vcId: signedVC.id,
+    //     vcType: type,
+    //     agentId: agent.id,
+    //     agentName: agent.name,
+    //     issuer: manager.did,
+    //   },
+    // })
 
     return NextResponse.json(vcRecord, { status: 201 })
   } catch (error: any) {

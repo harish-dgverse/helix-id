@@ -32,7 +32,7 @@ const typeConfig: Record<
   string,
   { label: string; color: string; icon: typeof ActivityIcon }
 > = {
-  AGENT_CREATED: { label: "Agent Created", color: "text-primary", icon: Bot },
+  AGENT_CREATED: { label: "Agent Onboarded", color: "text-primary", icon: Bot },
   VC_ISSUED: {
     label: "VC Issued",
     color: "text-chart-2",
@@ -252,7 +252,7 @@ export default function AuditPage() {
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Types</SelectItem>
-              <SelectItem value="AGENT_CREATED">Agent Created</SelectItem>
+              <SelectItem value="AGENT_CREATED">Agent Onboarded</SelectItem>
               <SelectItem value="VC_ISSUED">VC Issued</SelectItem>
               <SelectItem value="VIOLATION">Violations</SelectItem>
             </SelectContent>
@@ -303,9 +303,8 @@ export default function AuditPage() {
                     return (
                       <tr
                         key={log.id}
-                        className={`border-b border-border last:border-0 ${
-                          isViolation ? "bg-destructive/5" : "hover:bg-secondary"
-                        }`}
+                        className={`border-b border-border last:border-0 ${isViolation ? "bg-destructive/5" : "hover:bg-secondary"
+                          }`}
                       >
                         <td className="px-4 py-3">
                           <div className="flex items-center gap-2">

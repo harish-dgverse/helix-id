@@ -63,7 +63,7 @@ function formatRelative(dateStr: string): string {
 function formatActivityType(type: string): string {
   const map: Record<string, string> = {
     VC_ISSUED: "VC Issued",
-    AGENT_CREATED: "Agent Created",
+    AGENT_CREATED: "Agent Onboarded",
   }
   return map[type] ?? type.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())
 }

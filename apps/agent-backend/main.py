@@ -298,7 +298,7 @@ async def place_order_tool(book_id: str, quantity: int = 1) -> str:
     """Place an order for a book"""
     async with httpx.AsyncClient() as client:
         try:
-            payload = {"book_id": book_id, "quantity": quantity}
+            payload = {"book_id": book_id, "quantity": quantity, "ordered_by": 'agent'}
             response = await client.post(f"{BOOKING_API_URL}/orders", json=payload, timeout=5.0)
             
             if response.status_code == 201:
